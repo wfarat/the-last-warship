@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://gmeu4xj4lf0t"]
+
+[ext_resource type="Script" uid="uid://clvwitdaik3ii" path="res://enemy_1.gd" id="1_pjquw"]
+[ext_resource type="Texture2D" uid="uid://bmjxdwk4mhkmp" path="res://textures/enemies/Boats_color1/Boat_color1_1.png" id="2_663o1"]
+[ext_resource type="Texture2D" uid="uid://cnxlss0juffck" path="res://textures/enemies/Broken_asset/Broken_asset1.png" id="2_ovk8a"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ovk8a"]
+radius = 17.87
+height = 107.18
+
+[node name="Enemy1" type="CharacterBody2D" unique_id=1087080966 groups=["enemies"]]
+script = ExtResource("1_pjquw")
+destroyed_image = ExtResource("2_ovk8a")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=601009177]
+texture = ExtResource("2_663o1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1307947528 groups=["enemies"]]
+shape = SubResource("CapsuleShape2D_ovk8a")

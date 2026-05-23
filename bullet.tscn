@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://8c8m0padffa7"]
+
+[ext_resource type="Texture2D" uid="uid://b16tcl81m5vul" path="res://textures/weapons/Cannon/turret_01_bullet_01.png" id="1_v7oki"]
+[ext_resource type="Script" uid="uid://ik7l64glo6y2" path="res://bullet.gd" id="1_v8qja"]
+[ext_resource type="Texture2D" uid="uid://bci8824cju14y" path="res://textures/weapons/Cannon/turret_01_explosion.png" id="2_t4vbm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4vbm"]
+atlas = ExtResource("2_t4vbm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2b2rl"]
+atlas = ExtResource("2_t4vbm")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7duk"]
+atlas = ExtResource("2_t4vbm")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2bd8"]
+atlas = ExtResource("2_t4vbm")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0pa3"]
+atlas = ExtResource("2_t4vbm")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gofb6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4vbm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2b2rl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b7duk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2bd8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0pa3")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_v7oki")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t4vbm"]
+
+[node name="Bullet" type="Area2D" unique_id=576780632]
+script = ExtResource("1_v8qja")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1243973210]
+sprite_frames = SubResource("SpriteFrames_gofb6")
+animation = &"explode"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1740623509]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_t4vbm")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
