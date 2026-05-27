@@ -9,7 +9,12 @@ var distance_traveled: float = 0.0
 
 @onready var sprite = $AnimatedSprite2D
 
+# 1. _ready() runs exactly ONCE the moment the rocket is created
+func _ready() -> void:
+	sprite.play("flying")
+
 func _physics_process(delta: float) -> void:
+	# 2. We removed the play("flying") command from this 60fps loop!
 	var move_amount = current_speed * delta
 	var forward_vector = Vector2.UP.rotated(rotation)
 	position += forward_vector * move_amount
@@ -20,14 +25,18 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):
-		# Check if the enemy has our damage function, then pass the damage amount
 		if body.has_method("take_damage"):
 			body.take_damage(DAMAGE)
 			
-		detonate() # Blow up the rocket
+		detonate()
 
 func detonate():
+	# 3. This built-in function completely shuts off _physics_process
+	# so the rocket stops thinking, moving, and checking distances
+	set_physics_process(false)
+	
 	current_speed = 0.0
 	sprite.play("explode")
+	
 	await sprite.animation_finished
 	queue_free()
