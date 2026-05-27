@@ -100,7 +100,7 @@ Na mapie świata generują się neutralne wyspy z Portami. Gracz może do nich p
   * Lewy dolny róg: Duży wskaźnik HP okrętu oraz poziom osłony/pancerza.
   * Środek na dole: Ikony umiejętności aktywnych (`1`, `2`, `3`) wraz z graficznym zegarem odliczającym cooldown.
   * Prawy dolny róg: Licznik posiadanego złota.
-* **Minimapa:** Uproszczony radar w rogu ekranu, wskazujący kierunek do najbliższego Portu oraz pozycję nadciągającego Bossa.
+* **Minimapa: (Opcjonalnie)** Uproszczony radar w rogu ekranu, wskazujący kierunek do najbliższego Portu oraz pozycję nadciągającego Bossa.
 
 ## 8. Warunki Końca Gry i Punktacja
 Gra nie ma z góry zdefiniowanego końca (endless mode). Kończy się w momencie utraty wszystkich punktów HP przez gracza. 
