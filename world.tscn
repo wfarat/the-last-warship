@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://b5sjbqcurswsk" path="res://world.gd" id="1_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://gmeu4xj4lf0t" path="res://enemy_1.tscn" id="2_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://bri7yap8eeu7j" path="res://player.tscn" id="2_tlwt5"]
+[ext_resource type="Texture2D" uid="uid://upjpwlpfwyaa" path="res://textures/port.png" id="5_036b0"]
 
 [node name="World" type="Node2D" unique_id=634803544]
 script = ExtResource("1_tlwt5")
@@ -23,5 +24,17 @@ stretch_mode = 1
 [node name="Timer" type="Timer" parent="." unique_id=554433312]
 wait_time = 3.0
 autostart = true
+
+[node name="Port" type="StaticBody2D" parent="." unique_id=690236801]
+
+[node name="Sprite2D" type="Sprite2D" parent="Port" unique_id=922073928]
+position = Vector2(592, -720)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("5_036b0")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Port" unique_id=1978640603]
+position = Vector2(511.23398, -467.83594)
+scale = Vector2(1.6, 1.6)
+polygon = PackedVector2Array(9.85376, 5.522461, -285.1462, 29.89746, -276.3962, -56.97754, -202.64621, -116.97754, -202.64621, -193.85251, -165.14622, -212.60251, -113.896225, -293.8525, -48.27124, -325.1025, 206.72873, -319.4775, 228.60373, -306.9775, 322.35373, -299.4775, 331.10373, -258.2275, 331.10373, -196.97751, 375.47873, -199.47751, 367.97873, -81.35254, 274.22873, -76.97754, 209.85373, -6.977539, 78.60376, 4.272461, 85.47876, -206.97751, 9.85376, -208.22751)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

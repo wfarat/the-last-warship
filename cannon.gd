@@ -9,11 +9,9 @@ var current_cooldown: float = 0.0
 @onready var muzzle = $Muzzle
 
 func _physics_process(delta: float) -> void:
-	# 1. Aim at the mouse
 	var angle_to_mouse = global_position.direction_to(get_global_mouse_position()).angle()
 	global_rotation = angle_to_mouse + (PI / 2.0)
 
-	# 2. Automated Shooting
 	if current_cooldown > 0.0:
 		current_cooldown -= delta
 		
@@ -22,7 +20,6 @@ func _physics_process(delta: float) -> void:
 		current_cooldown = fire_rate
 
 func shoot():
-	# Safety check: don't shoot if we forgot to assign the bullet scene
 	if not bullet_scene:
 		return 
 		
