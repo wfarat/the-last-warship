@@ -2,11 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://bsff44m24x6n3" path="res://textures/water.png" id="1_fj7yv"]
 [ext_resource type="Script" uid="uid://b5sjbqcurswsk" path="res://world.gd" id="1_tlwt5"]
-[ext_resource type="PackedScene" uid="uid://gmeu4xj4lf0t" path="res://enemy_1.tscn" id="2_aqk2v"]
-[ext_resource type="PackedScene" uid="uid://bri7yap8eeu7j" path="res://player.tscn" id="2_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://gmeu4xj4lf0t" path="res://enemies/enemy_1.tscn" id="2_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://bri7yap8eeu7j" path="res://player/player.tscn" id="2_tlwt5"]
 [ext_resource type="Texture2D" uid="uid://upjpwlpfwyaa" path="res://textures/port.png" id="5_036b0"]
-[ext_resource type="Script" uid="uid://bxgh4r8lwym8l" path="res://port.gd" id="5_dwbse"]
-[ext_resource type="PackedScene" uid="uid://c01wy8faq5jhq" path="res://shop_hud.tscn" id="7_pkg7o"]
+[ext_resource type="Script" uid="uid://bxgh4r8lwym8l" path="res://hud/port.gd" id="5_dwbse"]
+[ext_resource type="PackedScene" uid="uid://c01wy8faq5jhq" path="res://hud/shop_hud.tscn" id="7_pkg7o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pkg7o"]
 size = Vector2(100, 38.25)

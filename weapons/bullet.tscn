@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://8c8m0padffa7"]
 
 [ext_resource type="Texture2D" uid="uid://b16tcl81m5vul" path="res://textures/weapons/Cannon/turret_01_bullet_01.png" id="1_v7oki"]
-[ext_resource type="Script" uid="uid://ik7l64glo6y2" path="res://bullet.gd" id="1_v8qja"]
+[ext_resource type="Script" uid="uid://ik7l64glo6y2" path="res://weapons/bullet.gd" id="1_v8qja"]
 [ext_resource type="Texture2D" uid="uid://bci8824cju14y" path="res://textures/weapons/Cannon/turret_01_explosion.png" id="2_t4vbm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t4vbm"]

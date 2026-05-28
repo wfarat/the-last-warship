@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://gmeu4xj4lf0t"]
 
-[ext_resource type="Script" uid="uid://clvwitdaik3ii" path="res://enemy_1.gd" id="1_pjquw"]
+[ext_resource type="Script" uid="uid://clvwitdaik3ii" path="res://enemies/enemy_1.gd" id="1_pjquw"]
 [ext_resource type="Texture2D" uid="uid://bmjxdwk4mhkmp" path="res://textures/enemies/Boats_color1/Boat_color1_1.png" id="2_663o1"]
 [ext_resource type="Texture2D" uid="uid://cnxlss0juffck" path="res://textures/enemies/Broken_asset/Broken_asset1.png" id="2_ovk8a"]
 

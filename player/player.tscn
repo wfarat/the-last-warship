@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bri7yap8eeu7j"]
 
 [ext_resource type="Texture2D" uid="uid://7pl24p7tjjtv" path="res://textures/body_01.png" id="1_4flbx"]
-[ext_resource type="Script" uid="uid://b5ar7jna6sdoa" path="res://player.gd" id="1_onrkg"]
-[ext_resource type="PackedScene" uid="uid://c2d3jxv55vmdo" path="res://cannon.tscn" id="3_i3pqv"]
+[ext_resource type="Script" uid="uid://b5ar7jna6sdoa" path="res://player/player.gd" id="1_onrkg"]
+[ext_resource type="PackedScene" uid="uid://c2d3jxv55vmdo" path="res://weapons/cannon.tscn" id="3_i3pqv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(100, 250)

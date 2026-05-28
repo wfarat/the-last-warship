@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://c01wy8faq5jhq"]
 
-[ext_resource type="Script" uid="uid://cb808p8it3nu4" path="res://canvas_layer.gd" id="1_o7v8o"]
+[ext_resource type="Script" uid="uid://cb808p8it3nu4" path="res://hud/canvas_layer.gd" id="1_o7v8o"]
 [ext_resource type="Texture2D" uid="uid://bbn0vrqigrum6" path="res://textures/weapons/Cannon/turret_01_mk1.png" id="2_7co7c"]
-[ext_resource type="PackedScene" uid="uid://c2d3jxv55vmdo" path="res://cannon.tscn" id="2_t0exi"]
+[ext_resource type="PackedScene" uid="uid://c2d3jxv55vmdo" path="res://weapons/cannon.tscn" id="2_t0exi"]
 [ext_resource type="Texture2D" uid="uid://dn2qlj78mhyki" path="res://textures/weapons/Laser/turret_02_mk1.png" id="3_t0exi"]
-[ext_resource type="PackedScene" uid="uid://brmyhcrxh16v6" path="res://laser.tscn" id="3_vcits"]
+[ext_resource type="PackedScene" uid="uid://brmyhcrxh16v6" path="res://weapons/laser.tscn" id="3_vcits"]
 [ext_resource type="Texture2D" uid="uid://cpo7thy3olfr1" path="res://textures/weapons/Missile/turret_03_mk1.png" id="4_vcits"]
 [ext_resource type="Texture2D" uid="uid://cgknp5rdemk0v" path="res://textures/weapons/Plasma/turret_04_mk1.png" id="5_jg1c4"]
 

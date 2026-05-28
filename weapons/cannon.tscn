@@ -2,8 +2,8 @@
 
 [ext_resource type="SpriteFrames" uid="uid://dhwutb5msmtl7" path="res://textures/weapons/Cannon/mk1.tres" id="1_emysx"]
 [ext_resource type="SpriteFrames" uid="uid://c0um4srvsys85" path="res://textures/weapons/Cannon/mk2.tres" id="3_emysx"]
-[ext_resource type="Script" uid="uid://dtk7h8dcievj6" path="res://cannon.gd" id="3_wjapt"]
-[ext_resource type="PackedScene" uid="uid://8c8m0padffa7" path="res://bullet.tscn" id="4_763vu"]
+[ext_resource type="Script" uid="uid://dtk7h8dcievj6" path="res://weapons/cannon.gd" id="3_wjapt"]
+[ext_resource type="PackedScene" uid="uid://8c8m0padffa7" path="res://weapons/bullet.tscn" id="4_763vu"]
 [ext_resource type="SpriteFrames" uid="uid://4obipik1yg8e" path="res://textures/weapons/Cannon/mk3.tres" id="4_wjapt"]
 
 [node name="Cannon" type="AnimatedSprite2D" unique_id=673055562]
