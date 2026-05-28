@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://c2d3jxv55vmdo"]
+
+[ext_resource type="Texture2D" uid="uid://bbn0vrqigrum6" path="res://textures/weapons/Cannon/turret_01_mk1.png" id="1_odvvv"]
+[ext_resource type="Texture2D" uid="uid://d1cy8sffddlhh" path="res://textures/weapons/Cannon/turret_01_mk1_anim.png" id="2_emysx"]
+[ext_resource type="Script" uid="uid://dtk7h8dcievj6" path="res://cannon.gd" id="3_wjapt"]
+[ext_resource type="PackedScene" uid="uid://8c8m0padffa7" path="res://bullet.tscn" id="4_763vu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sweqy"]
+atlas = ExtResource("2_emysx")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
+atlas = ExtResource("2_emysx")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jxqw"]
+atlas = ExtResource("2_emysx")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dw050"]
+atlas = ExtResource("2_emysx")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b26j0"]
+atlas = ExtResource("2_emysx")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7ghd"]
+atlas = ExtResource("2_emysx")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nvl01"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_odvvv")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sweqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hs0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jxqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dw050")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b26j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7ghd")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 15.0
+}]
+
+[node name="Cannon" type="AnimatedSprite2D" unique_id=673055562]
+sprite_frames = SubResource("SpriteFrames_nvl01")
+animation = &"shoot"
+script = ExtResource("3_wjapt")
+bullet_scene = ExtResource("4_763vu")
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1944629134]
+position = Vector2(0, -13)
