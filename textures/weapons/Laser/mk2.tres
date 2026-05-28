@@ -1,0 +1,65 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://m1ewnxdrlnfe"]
+
+[ext_resource type="Texture2D" uid="uid://dcdknoxibpaml" path="res://textures/weapons/Laser/laser_mk2_anim.png" id="1_iynl2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xw5cg"]
+atlas = ExtResource("1_iynl2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gdm7"]
+atlas = ExtResource("1_iynl2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfymw"]
+atlas = ExtResource("1_iynl2")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wyhtk"]
+atlas = ExtResource("1_iynl2")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7e0re"]
+atlas = ExtResource("1_iynl2")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sh4yq"]
+atlas = ExtResource("1_iynl2")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l120w"]
+atlas = ExtResource("1_iynl2")
+region = Rect2(160, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xw5cg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gdm7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yfymw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wyhtk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7e0re")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sh4yq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l120w")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 20.0
+}]

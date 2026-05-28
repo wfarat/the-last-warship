@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://brmyhcrxh16v6"]
+
+[ext_resource type="SpriteFrames" uid="uid://c68mtc3rtn2sf" path="res://textures/weapons/Laser/mk1.tres" id="1_roivt"]
+[ext_resource type="Script" uid="uid://d2s60bwbpq7bo" path="res://laser.gd" id="2_xw5cg"]
+[ext_resource type="SpriteFrames" uid="uid://m1ewnxdrlnfe" path="res://textures/weapons/Laser/mk2.tres" id="3_7vci3"]
+[ext_resource type="SpriteFrames" uid="uid://d2whdbig2mec2" path="res://textures/weapons/Laser/mk3.tres" id="4_xw5cg"]
+[ext_resource type="PackedScene" uid="uid://bg7jby16ms13k" path="res://beam.tscn" id="5_xw5cg"]
+
+[node name="Laser" type="AnimatedSprite2D" unique_id=673055562]
+sprite_frames = ExtResource("1_roivt")
+animation = &"shoot"
+script = ExtResource("2_xw5cg")
+tier_animations = Array[SpriteFrames]([ExtResource("1_roivt"), ExtResource("3_7vci3"), ExtResource("4_xw5cg")])
+bullet_scene = ExtResource("5_xw5cg")
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1944629134]
+position = Vector2(0, -13)

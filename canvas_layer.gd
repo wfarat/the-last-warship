@@ -7,7 +7,7 @@ extends CanvasLayer
 
 var player_ship: CharacterBody2D = null
 var selected_slot_index: int = -1
-var player_gold: int = 1200
+var player_gold: int = 5000
 
 @onready var slot_panel = $Panel/Box/HBox/SlotPanel
 @onready var action_panel = $Panel/Box/HBox/ActionPanel
