@@ -1,0 +1,62 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://c0um4srvsys85"]
+
+[ext_resource type="Texture2D" uid="uid://bfh6xmlc355e6" path="res://textures/weapons/Cannon/turret_01_mk2.png" id="1_aoi0b"]
+[ext_resource type="Texture2D" uid="uid://ba3ilqgirbnkh" path="res://textures/weapons/Cannon/turret_01_mk2_anim.png" id="2_5f80g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emysx"]
+atlas = ExtResource("2_5f80g")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjapt"]
+atlas = ExtResource("2_5f80g")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_763vu"]
+atlas = ExtResource("2_5f80g")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtrx2"]
+atlas = ExtResource("2_5f80g")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8be18"]
+atlas = ExtResource("2_5f80g")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iic0e"]
+atlas = ExtResource("2_5f80g")
+region = Rect2(160, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_aoi0b")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_emysx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjapt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_763vu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtrx2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8be18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iic0e")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 15.0
+}]

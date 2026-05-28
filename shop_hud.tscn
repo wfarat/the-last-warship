@@ -7,6 +7,21 @@
 [ext_resource type="Texture2D" uid="uid://cpo7thy3olfr1" path="res://textures/weapons/Missile/turret_03_mk1.png" id="4_vcits"]
 [ext_resource type="Texture2D" uid="uid://cgknp5rdemk0v" path="res://textures/weapons/Plasma/turret_04_mk1.png" id="5_jg1c4"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vcits"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+expand_margin_left = 40.0
+expand_margin_top = 40.0
+expand_margin_right = 40.0
+expand_margin_bottom = 40.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t0exi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vcits"]
+
 [node name="ShopHUD" type="CanvasLayer" unique_id=1208847061]
 process_mode = 3
 script = ExtResource("1_o7v8o")
@@ -15,113 +30,191 @@ laser_cannon = ExtResource("2_t0exi")
 missile_cannon = ExtResource("2_t0exi")
 plasma_cannon = ExtResource("2_t0exi")
 
-[node name="ActionPanel" type="Panel" parent="." unique_id=554722841]
+[node name="Panel" type="Panel" parent="." unique_id=155870529]
+custom_minimum_size = Vector2(800, 800)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vcits")
 
-[node name="ButtonContainer" type="VBoxContainer" parent="ActionPanel" unique_id=1906705120]
+[node name="Box" type="VBoxContainer" parent="Panel" unique_id=431077440]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="Panel/Box" unique_id=2034504705]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Welcome to the PORT
+What can we do for you today?"
+
+[node name="Gold" type="Label" parent="Panel/Box" unique_id=788419776]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Your gold: "
+
+[node name="HBox" type="HBoxContainer" parent="Panel/Box" unique_id=348039159]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="SlotPanel" type="Panel" parent="Panel/Box/HBox" unique_id=943000042]
+custom_minimum_size = Vector2(220, 350)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_t0exi")
+
+[node name="Slots" type="VBoxContainer" parent="Panel/Box/HBox/SlotPanel" unique_id=1193134566]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Box/HBox/SlotPanel/Slots" unique_id=1054968430]
+layout_mode = 2
+text = "Upgrade your canons:"
+
+[node name="Top" type="HBoxContainer" parent="Panel/Box/HBox/SlotPanel/Slots" unique_id=1357776659]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Left" type="Button" parent="Panel/Box/HBox/SlotPanel/Slots/Top" unique_id=1770072879]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Top left"
+
+[node name="Right" type="Button" parent="Panel/Box/HBox/SlotPanel/Slots/Top" unique_id=897836156]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Top right"
+
+[node name="Mid" type="HBoxContainer" parent="Panel/Box/HBox/SlotPanel/Slots" unique_id=492044399]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Left" type="Button" parent="Panel/Box/HBox/SlotPanel/Slots/Mid" unique_id=1487145105]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Mid left"
+
+[node name="Right" type="Button" parent="Panel/Box/HBox/SlotPanel/Slots/Mid" unique_id=1088286102]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Mid right"
+
+[node name="Bot" type="HBoxContainer" parent="Panel/Box/HBox/SlotPanel/Slots" unique_id=517048315]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Left" type="Button" parent="Panel/Box/HBox/SlotPanel/Slots/Bot" unique_id=436596923]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Bot left"
+
+[node name="Right" type="Button" parent="Panel/Box/HBox/SlotPanel/Slots/Bot" unique_id=917127813]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Bot right"
+
+[node name="ActionPanel" type="Panel" parent="Panel/Box/HBox" unique_id=554722841]
+custom_minimum_size = Vector2(250, 330)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_vcits")
+
+[node name="ButtonContainer" type="VBoxContainer" parent="Panel/Box/HBox/ActionPanel" unique_id=1906705120]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="StatusLabel" type="Label" parent="ActionPanel/ButtonContainer" unique_id=1222491462]
+[node name="StatusLabel" type="Label" parent="Panel/Box/HBox/ActionPanel/ButtonContainer" unique_id=1222491462]
 layout_mode = 2
 text = "Select a slot to see upgrade options."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BuyContainer" type="VBoxContainer" parent="ActionPanel/ButtonContainer" unique_id=1886918528]
+[node name="BuyContainer" type="VBoxContainer" parent="Panel/Box/HBox/ActionPanel/ButtonContainer" unique_id=1886918528]
 layout_mode = 2
+theme_override_constants/separation = 16
 
-[node name="Cannon" type="TextureButton" parent="ActionPanel/ButtonContainer/BuyContainer" unique_id=614473893]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Box/HBox/ActionPanel/ButtonContainer/BuyContainer" unique_id=1957870998]
 layout_mode = 2
-texture_normal = ExtResource("2_7co7c")
+theme_override_constants/separation = 16
 
-[node name="Laser" type="TextureButton" parent="ActionPanel/ButtonContainer/BuyContainer" unique_id=459014544]
+[node name="Missile" type="Button" parent="Panel/Box/HBox/ActionPanel/ButtonContainer/BuyContainer/HBoxContainer" unique_id=1146516272]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-texture_normal = ExtResource("3_t0exi")
+theme_override_icons/icon = ExtResource("4_vcits")
+text = "Missile
+900g"
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
 
-[node name="Missile" type="TextureButton" parent="ActionPanel/ButtonContainer/BuyContainer" unique_id=1700940573]
+[node name="Plasma" type="Button" parent="Panel/Box/HBox/ActionPanel/ButtonContainer/BuyContainer/HBoxContainer" unique_id=1970101235]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-texture_normal = ExtResource("4_vcits")
+theme_override_icons/icon = ExtResource("5_jg1c4")
+text = "Plasma
+1200g"
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
 
-[node name="Plasma" type="TextureButton" parent="ActionPanel/ButtonContainer/BuyContainer" unique_id=1337950848]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/Box/HBox/ActionPanel/ButtonContainer/BuyContainer" unique_id=1983727711]
 layout_mode = 2
-texture_normal = ExtResource("5_jg1c4")
+theme_override_constants/separation = 16
 
-[node name="UpgradeButton" type="Button" parent="ActionPanel/ButtonContainer" unique_id=64996623]
+[node name="Cannon" type="Button" parent="Panel/Box/HBox/ActionPanel/ButtonContainer/BuyContainer/HBoxContainer2" unique_id=405063715]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
+theme_override_icons/icon = ExtResource("2_7co7c")
+text = "Cannon
+300g"
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Laser" type="Button" parent="Panel/Box/HBox/ActionPanel/ButtonContainer/BuyContainer/HBoxContainer2" unique_id=1178179017]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_icons/icon = ExtResource("3_t0exi")
+text = "Laser
+600g"
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="UpgradeButton" type="Button" parent="Panel/Box/HBox/ActionPanel/ButtonContainer" unique_id=64996623]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Upgrade"
 
-[node name="SellButton" type="Button" parent="ActionPanel/ButtonContainer" unique_id=873068623]
+[node name="SellButton" type="Button" parent="Panel/Box/HBox/ActionPanel/ButtonContainer" unique_id=873068623]
+custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Sell Cannon"
 
-[node name="SlotPanel" type="Panel" parent="." unique_id=943000042]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Slots" type="VBoxContainer" parent="SlotPanel" unique_id=1193134566]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Top" type="HBoxContainer" parent="SlotPanel/Slots" unique_id=1357776659]
+[node name="CloseButton" type="Button" parent="Panel/Box" unique_id=1855977464]
+custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Leave the PORT"
 
-[node name="Left" type="Button" parent="SlotPanel/Slots/Top" unique_id=1770072879]
-layout_mode = 2
-text = "Top left"
-
-[node name="Right" type="Button" parent="SlotPanel/Slots/Top" unique_id=897836156]
-layout_mode = 2
-text = "Top right"
-
-[node name="Mid" type="HBoxContainer" parent="SlotPanel/Slots" unique_id=492044399]
-layout_mode = 2
-
-[node name="Left" type="Button" parent="SlotPanel/Slots/Mid" unique_id=1487145105]
-layout_mode = 2
-text = "Mid left"
-
-[node name="Right" type="Button" parent="SlotPanel/Slots/Mid" unique_id=1088286102]
-layout_mode = 2
-text = "Mid right"
-
-[node name="Bot" type="HBoxContainer" parent="SlotPanel/Slots" unique_id=517048315]
-layout_mode = 2
-
-[node name="Left" type="Button" parent="SlotPanel/Slots/Bot" unique_id=436596923]
-layout_mode = 2
-text = "Bot left"
-
-[node name="Right" type="Button" parent="SlotPanel/Slots/Bot" unique_id=917127813]
-layout_mode = 2
-text = "Bot right"
-
-[node name="CloseButton" type="Button" parent="SlotPanel/Slots" unique_id=1855977464]
-layout_mode = 2
-text = "Close"
-
-[connection signal="pressed" from="ActionPanel/ButtonContainer/BuyContainer/Cannon" to="." method="_on_buy_weapon_pressed" binds= ["basic"]]
-[connection signal="pressed" from="ActionPanel/ButtonContainer/BuyContainer/Laser" to="." method="_on_buy_weapon_pressed" binds= ["laser"]]
-[connection signal="pressed" from="ActionPanel/ButtonContainer/BuyContainer/Missile" to="." method="_on_buy_weapon_pressed" binds= ["missile"]]
-[connection signal="pressed" from="ActionPanel/ButtonContainer/BuyContainer/Plasma" to="." method="_on_buy_weapon_pressed" binds= ["plasma"]]
-[connection signal="pressed" from="ActionPanel/ButtonContainer/UpgradeButton" to="." method="_on_upgrade_pressed"]
-[connection signal="pressed" from="ActionPanel/ButtonContainer/SellButton" to="." method="_on_sell_button_pressed"]
-[connection signal="pressed" from="SlotPanel/Slots/Top/Left" to="." method="_on_slot_button_pressed" binds= [0]]
-[connection signal="pressed" from="SlotPanel/Slots/Top/Right" to="." method="_on_slot_button_pressed" binds= [1]]
-[connection signal="pressed" from="SlotPanel/Slots/Mid/Left" to="." method="_on_slot_button_pressed" binds= [2]]
-[connection signal="pressed" from="SlotPanel/Slots/Mid/Right" to="." method="_on_slot_button_pressed" binds= [3]]
-[connection signal="pressed" from="SlotPanel/Slots/Bot/Left" to="." method="_on_slot_button_pressed" binds= [4]]
-[connection signal="pressed" from="SlotPanel/Slots/Bot/Right" to="." method="_on_slot_button_pressed" binds= [5]]
-[connection signal="pressed" from="SlotPanel/Slots/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="Panel/Box/HBox/SlotPanel/Slots/Top/Left" to="." method="_on_slot_button_pressed" binds= [0]]
+[connection signal="pressed" from="Panel/Box/HBox/SlotPanel/Slots/Top/Right" to="." method="_on_slot_button_pressed" binds= [1]]
+[connection signal="pressed" from="Panel/Box/HBox/SlotPanel/Slots/Mid/Left" to="." method="_on_slot_button_pressed" binds= [2]]
+[connection signal="pressed" from="Panel/Box/HBox/SlotPanel/Slots/Mid/Right" to="." method="_on_slot_button_pressed" binds= [3]]
+[connection signal="pressed" from="Panel/Box/HBox/SlotPanel/Slots/Bot/Left" to="." method="_on_slot_button_pressed" binds= [4]]
+[connection signal="pressed" from="Panel/Box/HBox/SlotPanel/Slots/Bot/Right" to="." method="_on_slot_button_pressed" binds= [5]]
+[connection signal="pressed" from="Panel/Box/HBox/ActionPanel/ButtonContainer/BuyContainer/HBoxContainer/Missile" to="." method="_on_buy_weapon_pressed" binds= ["missile"]]
+[connection signal="pressed" from="Panel/Box/HBox/ActionPanel/ButtonContainer/BuyContainer/HBoxContainer/Plasma" to="." method="_on_buy_weapon_pressed" binds= ["plasma"]]
+[connection signal="pressed" from="Panel/Box/HBox/ActionPanel/ButtonContainer/BuyContainer/HBoxContainer2/Cannon" to="." method="_on_buy_weapon_pressed" binds= ["basic"]]
+[connection signal="pressed" from="Panel/Box/HBox/ActionPanel/ButtonContainer/BuyContainer/HBoxContainer2/Laser" to="." method="_on_buy_weapon_pressed" binds= ["laser"]]
+[connection signal="pressed" from="Panel/Box/HBox/ActionPanel/ButtonContainer/UpgradeButton" to="." method="_on_upgrade_pressed"]
+[connection signal="pressed" from="Panel/Box/HBox/ActionPanel/ButtonContainer/SellButton" to="." method="_on_sell_button_pressed"]
+[connection signal="pressed" from="Panel/Box/CloseButton" to="." method="_on_close_button_pressed"]

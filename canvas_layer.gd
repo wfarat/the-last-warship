@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-# Preloaded data for the different weapon types the player can buy
 @export var basic_cannon: PackedScene
 @export var laser_cannon: PackedScene
 @export var missile_cannon: PackedScene
@@ -8,40 +7,39 @@ extends CanvasLayer
 
 var player_ship: CharacterBody2D = null
 var selected_slot_index: int = -1
-var player_gold: int = 1200 # Track currency
+var player_gold: int = 1200
 
-@onready var slot_panel = $SlotPanel
-@onready var action_panel = $ActionPanel
-@onready var status_label = $ActionPanel/ButtonContainer/StatusLabel
-
+@onready var slot_panel = $Panel/Box/HBox/SlotPanel
+@onready var action_panel = $Panel/Box/HBox/ActionPanel
+@onready var status_label = $Panel/Box/HBox/ActionPanel/ButtonContainer/StatusLabel
+@onready var gold_label = $Panel/Box/Gold
+@onready var upgrade_button = $Panel/Box/HBox/ActionPanel/ButtonContainer/UpgradeButton
+@onready var sell_button = $Panel/Box/HBox/ActionPanel/ButtonContainer/SellButton
 func _ready() -> void:
-	# 1. Hide the entire CanvasLayer so the screen is clear while sailing
 	hide() 
-	
-	# 2. Hide the action panel so it's perfectly reset for the first time you enter port
+
 	action_panel.hide()
 	
 func open_shop(player: CharacterBody2D):
 	show()
+	update_gold_display()
 	player_ship = player
-	action_panel.hide() # Hide choices until they select a slot
+	action_panel.hide()
 
-# Call this from your UI layout when the player clicks Slot Button #1, #2, etc.
 func _on_slot_button_pressed(slot_index: int):
 	selected_slot_index = slot_index
 	action_panel.show()
 	
-	# Get the specific Marker2D slot from the player ship's node array
 	var target_slot = player_ship.get_node("Slots").get_child(slot_index)
 	
 	if target_slot.get_child_count() == 0:
-		status_label.text = "Slot is EMPTY. Choose a weapon to install:"
-		# Show "Buy New" buttons, hide "Upgrade/Swap" buttons
+		status_label.text = "Choose a weapon to install:"
 		set_button_visibility(true, false)
 	else:
 		var current_weapon = target_slot.get_child(0)
 		status_label.text = "Occupied by: " + current_weapon.name
-		# Hide "Buy New" buttons, show "Upgrade/Swap" buttons
+		if (current_weapon.has_method("next_tier_price")):
+			upgrade_button.text = 'Upgrade ' + str(current_weapon.next_tier_price()) + 'g'
 		set_button_visibility(false, true)
 
 func _on_buy_weapon_pressed(weapon_type: String):
@@ -58,7 +56,7 @@ func _on_buy_weapon_pressed(weapon_type: String):
 		
 	if player_gold >= cost:
 		player_gold -= cost
-		# Call the installation system we built earlier
+		update_gold_display()
 		player_ship.install_cannon(selected_slot_index, weapon_blueprint)
 		_on_slot_button_pressed(selected_slot_index) # Refresh UI view
 	else:
@@ -68,25 +66,28 @@ func _on_upgrade_pressed():
 	var target_slot = player_ship.get_node("Slots").get_child(selected_slot_index)
 	var current_weapon = target_slot.get_child(0)
 	
-	# Check if the weapon has an upgrade function built into its own script
-	if current_weapon.has_method("upgrade_tier") and player_gold >= 400:
-		player_gold -= 400
+	if current_weapon.has_method("upgrade_tier") and current_weapon.has_method("next_tier_price"):
+		player_gold -= current_weapon.next_tier_price()
+		update_gold_display()
 		current_weapon.upgrade_tier()
-		status_label.text = "Upgraded to Tier " + str(current_weapon.tier)
+		status_label.text = "Upgraded to Tier " + str(current_weapon.current_tier+1)
 
 func _on_sell_button_pressed():
 	var target_slot = player_ship.get_node("Slots").get_child(selected_slot_index)
-	# Wipe out the current child node safely
 	for child in target_slot.get_children():
 		child.queue_free()
-	player_gold += 150 # Give partial refund
-	_on_slot_button_pressed(selected_slot_index) # Refresh UI view
+	player_gold += 150
+	update_gold_display()
+	_on_slot_button_pressed(selected_slot_index)
 
 func set_button_visibility(buy_state: bool, upgrade_state: bool):
-	$ActionPanel/ButtonContainer/BuyContainer.visible = buy_state
-	$ActionPanel/ButtonContainer/UpgradeButton.visible = upgrade_state
-	$ActionPanel/ButtonContainer/SellButton.visible = upgrade_state
+	$Panel/Box/HBox/ActionPanel/ButtonContainer/BuyContainer.visible = buy_state
+	sell_button.visible = upgrade_state
+	upgrade_button.visible = upgrade_state
 
+func update_gold_display():
+	gold_label.text = "Your gold: " + str(player_gold)
+	
 func _on_close_button_pressed() -> void:
 	hide()
 	get_tree().paused = false # Unpause the game world
