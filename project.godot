@@ -27,6 +27,7 @@ enabled=PackedStringArray("res://addons/GitGodot/plugin.cfg")
 [global_group]
 
 enemies=""
+player=""
 
 [physics]
 

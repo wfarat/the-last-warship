@@ -2,71 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://7pl24p7tjjtv" path="res://textures/body_01.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://b5ar7jna6sdoa" path="res://player.gd" id="1_onrkg"]
-[ext_resource type="PackedScene" uid="uid://8c8m0padffa7" path="res://bullet.tscn" id="2_sweqy"]
-[ext_resource type="Texture2D" uid="uid://bbn0vrqigrum6" path="res://textures/weapons/Cannon/turret_01_mk1.png" id="3_i3pqv"]
-[ext_resource type="Texture2D" uid="uid://d1cy8sffddlhh" path="res://textures/weapons/Cannon/turret_01_mk1_anim.png" id="4_hqtel"]
-[ext_resource type="Script" uid="uid://dtk7h8dcievj6" path="res://cannon.gd" id="6_2hs0m"]
+[ext_resource type="PackedScene" uid="uid://c2d3jxv55vmdo" path="res://cannon.tscn" id="3_i3pqv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(100, 250)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sweqy"]
-atlas = ExtResource("4_hqtel")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
-atlas = ExtResource("4_hqtel")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1jxqw"]
-atlas = ExtResource("4_hqtel")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dw050"]
-atlas = ExtResource("4_hqtel")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b26j0"]
-atlas = ExtResource("4_hqtel")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n7ghd"]
-atlas = ExtResource("4_hqtel")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_nvl01"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_i3pqv")
-}],
-"loop": false,
-"name": &"idle",
-"speed": 12.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sweqy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2hs0m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1jxqw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dw050")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b26j0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n7ghd")
-}],
-"loop": false,
-"name": &"shoot",
-"speed": 15.0
-}]
 
 [node name="Player" type="CharacterBody2D" unique_id=1611458058]
 script = ExtResource("1_onrkg")
@@ -75,16 +14,30 @@ script = ExtResource("1_onrkg")
 texture = ExtResource("1_4flbx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=810710367]
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=731443005]
 
-[node name="Cannon" type="AnimatedSprite2D" parent="." unique_id=1135575235]
-position = Vector2(-16, -18)
-sprite_frames = SubResource("SpriteFrames_nvl01")
-animation = &"shoot"
-script = ExtResource("6_2hs0m")
-bullet_scene = ExtResource("2_sweqy")
+[node name="Slots" type="Node2D" parent="." unique_id=1762275140]
 
-[node name="Muzzle" type="Marker2D" parent="Cannon" unique_id=1160827512]
-position = Vector2(0, -13)
+[node name="SlotTopLeft" type="Marker2D" parent="Slots" unique_id=2129356234]
+position = Vector2(-16.564636, -48.73813)
+
+[node name="SlotTopRight" type="Marker2D" parent="Slots" unique_id=1040806636]
+position = Vector2(16, -49)
+
+[node name="SlotMidLeft" type="Marker2D" parent="Slots" unique_id=298839052]
+position = Vector2(-16, -15)
+
+[node name="Cannon" parent="Slots/SlotMidLeft" unique_id=673055562 instance=ExtResource("3_i3pqv")]
+position = Vector2(0, -3)
+
+[node name="SlotMidRight" type="Marker2D" parent="Slots" unique_id=832235718]
+position = Vector2(16, -17)
+
+[node name="SlotBotLeft" type="Marker2D" parent="Slots" unique_id=53324119]
+position = Vector2(-16, 16)
+
+[node name="SlotBotRight" type="Marker2D" parent="Slots" unique_id=1997675383]
+position = Vector2(16, 15)
