@@ -76,7 +76,7 @@ Na mapie świata generują się neutralne wyspy z Portami. Gracz może do nich p
 * Interakcja z portem **zatrzymuje czas rozgrywki** i otwiera interfejs sklepu.
 * Walutą jest **Złoto** wypadające z przeciwników.
 * **Skalowanie cen:** Każdy kolejny zakup tego samego ulepszenia (np. +10% Max HP, +5% Prędkości) zwiększa koszt następnego poziomu o określony mnożnik wykładniczy:
-  $$	ext{Koszt} = 	ext{Koszt Bazowy} 	imes (1.5)^{	ext{Poziom Ulepszenia}}$$
+  $$\text{Koszt} = \text{Koszt Bazowy} \times (1.5)^{\text{Poziom Ulepszenia}}$$
 * W porcie można również zakupić przedmioty jednorazowe (Consumables), takie jak *Zestawy Naprawcze* czy *Miny Morskie*.
 
 ---
@@ -100,10 +100,10 @@ Na mapie świata generują się neutralne wyspy z Portami. Gracz może do nich p
   * Lewy dolny róg: Duży wskaźnik HP okrętu oraz poziom osłony/pancerza.
   * Środek na dole: Ikony umiejętności aktywnych (`1`, `2`, `3`) wraz z graficznym zegarem odliczającym cooldown.
   * Prawy dolny róg: Licznik posiadanego złota.
-* **Minimapa:** Uproszczony radar w rogu ekranu, wskazujący kierunek do najbliższego Portu oraz pozycję nadciągającego Bossa.
+* **Minimapa: (Opcjonalnie)** Uproszczony radar w rogu ekranu, wskazujący kierunek do najbliższego Portu oraz pozycję nadciągającego Bossa.
 
 ## 8. Warunki Końca Gry i Punktacja
 Gra nie ma z góry zdefiniowanego końca (endless mode). Kończy się w momencie utraty wszystkich punktów HP przez gracza. 
 * **Wynik końcowy (Score)** obliczany jest na podstawie algorytmu:
-  $$	ext{Wynik} = (	ext{Czas Przetrwania w sekundach} 	imes 10) + (	ext{Pokonani Wrogowie} 	imes 50) + (	ext{Zgładzeni Bossowie} 	imes 2000)$$
+  $$\text{Wynik} = (\text{Czas Przetrwania w sekundach}\times 10) + (\text{Pokonani Wrogowie} \times 50) + (\text{Zgładzeni Bossowie} \times 2000)$$
 * Po śmierci wyświetla się ekran podsumowania z listą zdobytych osiągnięć i statystykami z danej rundy.
