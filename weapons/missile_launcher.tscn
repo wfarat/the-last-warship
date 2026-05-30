@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c46rsvlcfx1ly"]
+
+[ext_resource type="Script" uid="uid://dt13pr86liujx" path="res://weapons/static_weapon.gd" id="1_6k2dh"]
+[ext_resource type="Texture2D" uid="uid://cpo7thy3olfr1" path="res://textures/weapons/Missile/turret_03_mk1.png" id="2_k0tt5"]
+[ext_resource type="Texture2D" uid="uid://cwy260d5j7r7i" path="res://textures/weapons/Missile/turret_03_mk2.png" id="3_so0js"]
+[ext_resource type="Texture2D" uid="uid://bixc7sdrelwg6" path="res://textures/weapons/Missile/turret_03_mk3.png" id="4_ddvjx"]
+[ext_resource type="PackedScene" uid="uid://6w4surus0i42" path="res://weapons/missile.tscn" id="5_ddvjx"]
+
+[node name="MissileLauncher" type="Node2D" unique_id=200758414]
+script = ExtResource("1_6k2dh")
+tier_texture = Array[CompressedTexture2D]([ExtResource("2_k0tt5"), ExtResource("3_so0js"), ExtResource("4_ddvjx")])
+tier_fire_rates = Array[float]([0.8, 0.65, 0.5])
+tier_damage = Array[int]([60, 100, 150])
+tier_price = Array[int]([900, 1800, 2700])
+bullet_scene = ExtResource("5_ddvjx")
+fire_rate = 0.8
+damage = 60
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1944629134]
+position = Vector2(0, -13)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1381756769]
+texture = ExtResource("2_k0tt5")

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://6suodopq8y1q"]
+
+[ext_resource type="Script" uid="uid://dt13pr86liujx" path="res://weapons/static_weapon.gd" id="1_18tmo"]
+[ext_resource type="Texture2D" uid="uid://cgknp5rdemk0v" path="res://textures/weapons/Plasma/turret_04_mk1.png" id="2_g1qgg"]
+[ext_resource type="Texture2D" uid="uid://cvbx7phovlhxe" path="res://textures/weapons/Plasma/turret_04_mk2.png" id="3_cl84d"]
+[ext_resource type="Texture2D" uid="uid://dkvn4atrhli60" path="res://textures/weapons/Plasma/turret_04_mk3.png" id="4_cinsr"]
+[ext_resource type="PackedScene" uid="uid://ud51gbpofi5o" path="res://weapons/plasma.tscn" id="5_uknkb"]
+
+[node name="PlasmaLauncher" type="Node2D" unique_id=200758414]
+script = ExtResource("1_18tmo")
+tier_texture = Array[CompressedTexture2D]([ExtResource("2_g1qgg"), ExtResource("3_cl84d"), ExtResource("4_cinsr")])
+tier_fire_rates = Array[float]([0.7, 0.6, 0.5])
+tier_damage = Array[int]([80, 120, 180])
+tier_price = Array[int]([1200, 2400, 3600])
+bullet_scene = ExtResource("5_uknkb")
+fire_rate = 0.7
+damage = 80
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1944629134]
+position = Vector2(0, -13)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1381756769]
+texture = ExtResource("2_g1qgg")

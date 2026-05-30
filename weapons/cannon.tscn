@@ -2,16 +2,18 @@
 
 [ext_resource type="SpriteFrames" uid="uid://dhwutb5msmtl7" path="res://textures/weapons/Cannon/mk1.tres" id="1_emysx"]
 [ext_resource type="SpriteFrames" uid="uid://c0um4srvsys85" path="res://textures/weapons/Cannon/mk2.tres" id="3_emysx"]
-[ext_resource type="Script" uid="uid://dtk7h8dcievj6" path="res://weapons/cannon.gd" id="3_wjapt"]
+[ext_resource type="Script" uid="uid://dtk7h8dcievj6" path="res://weapons/animated_weapon.gd" id="3_wjapt"]
 [ext_resource type="PackedScene" uid="uid://8c8m0padffa7" path="res://weapons/bullet.tscn" id="4_763vu"]
 [ext_resource type="SpriteFrames" uid="uid://4obipik1yg8e" path="res://textures/weapons/Cannon/mk3.tres" id="4_wjapt"]
 
-[node name="Cannon" type="AnimatedSprite2D" unique_id=673055562]
-sprite_frames = ExtResource("1_emysx")
-animation = &"shoot"
+[node name="Cannon" type="Node2D" unique_id=1980134861]
 script = ExtResource("3_wjapt")
 tier_animations = Array[SpriteFrames]([ExtResource("1_emysx"), ExtResource("3_emysx"), ExtResource("4_wjapt")])
 bullet_scene = ExtResource("4_763vu")
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=1944629134]
 position = Vector2(0, -13)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1402658960]
+sprite_frames = ExtResource("1_emysx")
+animation = &"idle"

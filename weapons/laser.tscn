@@ -1,17 +1,22 @@
 [gd_scene format=3 uid="uid://brmyhcrxh16v6"]
 
+[ext_resource type="Script" uid="uid://dtk7h8dcievj6" path="res://weapons/animated_weapon.gd" id="1_ar4ys"]
 [ext_resource type="SpriteFrames" uid="uid://c68mtc3rtn2sf" path="res://textures/weapons/Laser/mk1.tres" id="1_roivt"]
-[ext_resource type="Script" uid="uid://d2s60bwbpq7bo" path="res://weapons/laser.gd" id="2_xw5cg"]
 [ext_resource type="SpriteFrames" uid="uid://m1ewnxdrlnfe" path="res://textures/weapons/Laser/mk2.tres" id="3_7vci3"]
 [ext_resource type="SpriteFrames" uid="uid://d2whdbig2mec2" path="res://textures/weapons/Laser/mk3.tres" id="4_xw5cg"]
 [ext_resource type="PackedScene" uid="uid://bg7jby16ms13k" path="res://weapons/beam.tscn" id="5_xw5cg"]
 
-[node name="Laser" type="AnimatedSprite2D" unique_id=673055562]
-sprite_frames = ExtResource("1_roivt")
-animation = &"shoot"
-script = ExtResource("2_xw5cg")
+[node name="Laser" type="Node2D" unique_id=1484548325]
+script = ExtResource("1_ar4ys")
 tier_animations = Array[SpriteFrames]([ExtResource("1_roivt"), ExtResource("3_7vci3"), ExtResource("4_xw5cg")])
+tier_damage = Array[int]([35, 50, 80])
+tier_price = Array[int]([600, 1200, 1800])
 bullet_scene = ExtResource("5_xw5cg")
+damage = 35
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=1944629134]
 position = Vector2(0, -13)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2025081394]
+sprite_frames = ExtResource("1_roivt")
+animation = &"idle"
