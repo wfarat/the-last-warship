@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var destroyed_image: Texture2D
 @export var xp_reward: int = 25 
-
+@export var loot_drop_scene: PackedScene
 var health = 100
 var is_destroyed = false
 
@@ -25,7 +25,16 @@ func explode():
 	
 	if destroyed_image:
 		sprite.texture = destroyed_image
+		# --- NEW LOOT DROP LOGIC ---
+	if loot_drop_scene:
+		var chest = loot_drop_scene.instantiate()
 		
+		# Set the chest's location to be exactly where the enemy died
+		chest.global_position = global_position 
+		
+		# Add the chest to the main game world (not as a child of the dying enemy!)
+		get_tree().current_scene.add_child(chest)
+	# ---------------------------
 	collision.set_deferred("disabled", true)
 	remove_from_group("enemies")
 	

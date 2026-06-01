@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://d0lxq08ypcew3"]
+
+[ext_resource type="Script" uid="uid://c4af1tuhu3sls" path="res://misc/chest.gd" id="1_8uwsg"]
+[ext_resource type="Texture2D" uid="uid://bepkna4hy2jgw" path="res://textures/drops/chest.png" id="2_bp1or"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bvnfa"]
+radius = 200.0
+
+[node name="Chest" type="Area2D" unique_id=381169583]
+script = ExtResource("1_8uwsg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=421588671]
+shape = SubResource("CircleShape2D_bvnfa")
+
+[node name="WaterMask" type="ColorRect" parent="." unique_id=1925734487]
+clip_children = 1
+offset_left = -39.0
+offset_top = -35.0
+offset_right = 39.0
+offset_bottom = 26.0
+
+[node name="Sprite2D" type="Sprite2D" parent="WaterMask" unique_id=888278748]
+position = Vector2(39, 61)
+rotation = -0.17453292
+texture = ExtResource("2_bp1or")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

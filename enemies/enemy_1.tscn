@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://clvwitdaik3ii" path="res://enemies/enemy_1.gd" id="1_pjquw"]
 [ext_resource type="Texture2D" uid="uid://bmjxdwk4mhkmp" path="res://textures/enemies/Boats_color1/Boat_color1_1.png" id="2_663o1"]
 [ext_resource type="Texture2D" uid="uid://cnxlss0juffck" path="res://textures/enemies/Broken_asset/Broken_asset1.png" id="2_ovk8a"]
+[ext_resource type="PackedScene" uid="uid://d0lxq08ypcew3" path="res://misc/chest.tscn" id="3_8dj5n"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ovk8a"]
 radius = 17.87
@@ -11,6 +12,7 @@ height = 107.18
 [node name="Enemy1" type="CharacterBody2D" unique_id=1087080966 groups=["enemies"]]
 script = ExtResource("1_pjquw")
 destroyed_image = ExtResource("2_ovk8a")
+loot_drop_scene = ExtResource("3_8dj5n")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=601009177]
 texture = ExtResource("2_663o1")
