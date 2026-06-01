@@ -14,6 +14,10 @@ config/name="the-last-warship"
 run/main_scene="uid://71msi1u0pofy"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
+[autoload]
+
+PlayerData="*uid://ctppg7tyd4p64"
+
 [display]
 
 window/size/viewport_width=1920

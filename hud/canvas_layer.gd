@@ -7,7 +7,6 @@ extends CanvasLayer
 
 var player_ship: CharacterBody2D = null
 var selected_slot_index: int = -1
-var player_gold: int = 5000
 
 @onready var slot_panel = $Panel/Box/HBox/SlotPanel
 @onready var action_panel = $Panel/Box/HBox/ActionPanel
@@ -17,12 +16,12 @@ var player_gold: int = 5000
 @onready var sell_button = $Panel/Box/HBox/ActionPanel/ButtonContainer/SellButton
 func _ready() -> void:
 	hide() 
-
+	PlayerData.gold_changed.connect(_update_gold_display)
+	_update_gold_display(PlayerData.gold)
 	action_panel.hide()
 	
 func open_shop(player: CharacterBody2D):
 	show()
-	update_gold_display()
 	player_ship = player
 	action_panel.hide()
 
@@ -54,9 +53,7 @@ func _on_buy_weapon_pressed(weapon_type: String):
 		"missile": weapon_blueprint = missile_cannon; cost = 900
 		"plasma": weapon_blueprint = plasma_cannon; cost = 1200
 		
-	if player_gold >= cost:
-		player_gold -= cost
-		update_gold_display()
+	if PlayerData.spend_gold(cost):
 		player_ship.install_cannon(selected_slot_index, weapon_blueprint)
 		_on_slot_button_pressed(selected_slot_index) # Refresh UI view
 	else:
@@ -67,26 +64,26 @@ func _on_upgrade_pressed():
 	var current_weapon = target_slot.get_child(0)
 	
 	if current_weapon.has_method("upgrade_tier") and current_weapon.has_method("next_tier_price"):
-		player_gold -= current_weapon.next_tier_price()
-		update_gold_display()
-		current_weapon.upgrade_tier()
-		status_label.text = "Upgraded to Tier " + str(current_weapon.current_tier+1)
+		if PlayerData.spend_gold(current_weapon.next_tier_price()):
+			current_weapon.upgrade_tier()
+			status_label.text = "Upgraded to Tier " + str(current_weapon.current_tier+1)
 
 func _on_sell_button_pressed():
 	var target_slot = player_ship.get_node("Slots").get_child(selected_slot_index)
 	for child in target_slot.get_children():
 		child.queue_free()
-	player_gold += 150
-	update_gold_display()
-	_on_slot_button_pressed(selected_slot_index)
+	var current_weapon = target_slot.get_child(0)
+	if current_weapon.has_method("next_tier_price"):
+		PlayerData.add_gold(current_weapon.next_tier_price())
+		_on_slot_button_pressed(selected_slot_index)
 
 func set_button_visibility(buy_state: bool, upgrade_state: bool):
 	$Panel/Box/HBox/ActionPanel/ButtonContainer/BuyContainer.visible = buy_state
 	sell_button.visible = upgrade_state
 	upgrade_button.visible = upgrade_state
 
-func update_gold_display():
-	gold_label.text = "Your gold: " + str(player_gold)
+func _update_gold_display(new_gold: int):
+	gold_label.text = "Your gold: " + str(new_gold)
 	
 func _on_close_button_pressed() -> void:
 	hide()

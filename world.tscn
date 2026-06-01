@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://upjpwlpfwyaa" path="res://textures/port.png" id="5_036b0"]
 [ext_resource type="Script" uid="uid://bxgh4r8lwym8l" path="res://hud/port.gd" id="5_dwbse"]
 [ext_resource type="PackedScene" uid="uid://c01wy8faq5jhq" path="res://hud/shop_hud.tscn" id="7_pkg7o"]
+[ext_resource type="PackedScene" uid="uid://c061rjvsys7tf" path="res://main_hud.tscn" id="8_gbfbk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pkg7o"]
 size = Vector2(100, 38.25)
@@ -52,6 +53,9 @@ position = Vector2(-40.786743, -75.99988)
 shape = SubResource("RectangleShape2D_pkg7o")
 
 [node name="ShopHUD" parent="." unique_id=1208847061 instance=ExtResource("7_pkg7o")]
+
+[node name="MainHUD" parent="." unique_id=1452821638 node_paths=PackedStringArray("player_ship") instance=ExtResource("8_gbfbk")]
+player_ship = NodePath("../Player")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Port/DockSensor" to="Port" method="_on_dock_sensor_body_entered"]

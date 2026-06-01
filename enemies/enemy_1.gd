@@ -1,31 +1,34 @@
 extends CharacterBody2D
 
 @export var destroyed_image: Texture2D
+@export var xp_reward: int = 25 
 
 var health = 100
-var is_destroyed = false # Prevents the wreckage from taking more damage
+var is_destroyed = false
 
 @onready var sprite = $Sprite2D
 @onready var collision = $CollisionShape2D
 
 func take_damage(amount: int):
-	# If the ship is already destroyed, ignore any extra hits
 	if is_destroyed:
 		return 
 		
 	health -= amount
 	
-	# Check if the health has dropped to 0 or below
 	if health <= 0:
 		explode()
 
 func explode():
-	is_destroyed = true # Mark as dead
+	is_destroyed = true
 	
-	# Swap the texture to the wrecked ship
+	PlayerData.add_xp(xp_reward)
+	
 	if destroyed_image:
 		sprite.texture = destroyed_image
 		
-	# Turn off collision and remove from the target group
 	collision.set_deferred("disabled", true)
 	remove_from_group("enemies")
+	
+	await get_tree().create_timer(3.0).timeout
+	
+	queue_free()

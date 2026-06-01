@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://c061rjvsys7tf"]
+
+[ext_resource type="Script" uid="uid://4txyccmp6c75" path="res://main_hud.gd" id="1_0d230"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0d230"]
+bg_color = Color(0.12941177, 0.12941177, 0.12941177, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d7oqy"]
+bg_color = Color(0.6117647, 0.15294118, 0.6901961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lkse2"]
+bg_color = Color(0.12941177, 0.12941177, 0.12941177, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b71xr"]
+bg_color = Color(0.827451, 0.18431373, 0.18431373, 1)
+
+[node name="MainHUD" type="CanvasLayer" unique_id=1452821638]
+script = ExtResource("1_0d230")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1174607078]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 60
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=2038010584]
+layout_mode = 2
+
+[node name="GoldLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=499899302]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.75686276, 0.02745098, 1)
+theme_override_font_sizes/font_size = 32
+
+[node name="LevelLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1622438308]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6117647, 0.15294118, 0.6901961, 1)
+theme_override_font_sizes/font_size = 32
+
+[node name="XPBar" type="ProgressBar" parent="MarginContainer/VBoxContainer" unique_id=1717444081]
+custom_minimum_size = Vector2(400, 40)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_0d230")
+theme_override_styles/fill = SubResource("StyleBoxFlat_d7oqy")
+
+[node name="HPBar" type="ProgressBar" parent="MarginContainer/VBoxContainer" unique_id=1146148647]
+custom_minimum_size = Vector2(400, 40)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_lkse2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_b71xr")

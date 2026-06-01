@@ -1,7 +1,12 @@
 extends CharacterBody2D
 
+signal hp_changed(current_hp, max_hp)
+
 const SPEED = 300.0
 const ROTATION_SPEED = 3.0 
+
+var max_hp: int = 100
+var current_hp: int = 100
 
 func _physics_process(delta: float) -> void:
 	# Just steering and driving!
@@ -34,3 +39,22 @@ func install_cannon(slot_index: int, new_cannon_scene: PackedScene):
 	
 	# 3. Add it to the exact Marker2D slot
 	target_slot.add_child(new_cannon)
+
+func take_damage(amount: int):
+	current_hp -= amount
+	hp_changed.emit(current_hp, max_hp)
+	
+	if current_hp <= 0:
+		die()
+
+func die():	
+	# Optional: You could spawn an explosion scene right here!
+	
+	# Option 1: Freeze the game immediately
+	get_tree().paused = true
+	
+	# Option 2: Load a completely separate Game Over menu scene
+	# get_tree().change_scene_to_file("res://game_over_screen.tscn")
+	
+	# Finally, delete the ship from the game world
+	queue_free()
