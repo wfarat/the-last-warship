@@ -1,17 +1,11 @@
 [gd_scene format=3 uid="uid://71msi1u0pofy"]
 
-[ext_resource type="Texture2D" uid="uid://bsff44m24x6n3" path="res://textures/water.png" id="1_fj7yv"]
 [ext_resource type="Script" uid="uid://b5sjbqcurswsk" path="res://world.gd" id="1_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://gmeu4xj4lf0t" path="res://enemies/enemy_1.tscn" id="2_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://bri7yap8eeu7j" path="res://player/player.tscn" id="2_tlwt5"]
-[ext_resource type="Texture2D" uid="uid://upjpwlpfwyaa" path="res://textures/port.png" id="5_036b0"]
-[ext_resource type="Script" uid="uid://bxgh4r8lwym8l" path="res://hud/port.gd" id="5_dwbse"]
 [ext_resource type="PackedScene" uid="uid://c01wy8faq5jhq" path="res://hud/shop_hud.tscn" id="7_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://c061rjvsys7tf" path="res://hud/main_hud.tscn" id="8_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://dsbsdjlqnwqh" path="res://map_generation.tscn" id="9_ioo17"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pkg7o"]
-size = Vector2(100, 38.25)
 
 [node name="World" type="Node2D" unique_id=634803544]
 script = ExtResource("1_tlwt5")
@@ -20,48 +14,16 @@ enemy_scene = ExtResource("2_aqk2v")
 [node name="map_generation" parent="." unique_id=1720494624 node_paths=PackedStringArray("player") instance=ExtResource("9_ioo17")]
 player = NodePath("../Player")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=26050495]
-visible = false
-texture_repeat = 2
-offset_left = -1122.0
-offset_top = -1032.0
-offset_right = 1137.0
-offset_bottom = 1047.0
-texture = ExtResource("1_fj7yv")
-stretch_mode = 1
-
 [node name="Player" parent="." unique_id=1611458058 instance=ExtResource("2_tlwt5")]
 
 [node name="Timer" type="Timer" parent="." unique_id=554433312]
 wait_time = 3.0
 autostart = true
 
-[node name="Port" type="StaticBody2D" parent="." unique_id=690236801 node_paths=PackedStringArray("shop_hud")]
-script = ExtResource("5_dwbse")
-shop_hud = NodePath("../ShopHUD")
-
-[node name="Sprite2D" type="Sprite2D" parent="Port" unique_id=922073928]
-position = Vector2(592, -720)
-scale = Vector2(1.6, 1.6)
-texture = ExtResource("5_036b0")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Port" unique_id=1978640603]
-position = Vector2(511.23398, -467.83594)
-scale = Vector2(1.6, 1.6)
-polygon = PackedVector2Array(9.85376, 5.522461, -285.1462, 29.89746, -276.3962, -56.97754, -202.64621, -116.97754, -202.64621, -193.85251, -165.14622, -212.60251, -113.896225, -293.8525, -48.27124, -325.1025, 206.72873, -319.4775, 228.60373, -306.9775, 322.35373, -299.4775, 331.10373, -258.2275, 331.10373, -196.97751, 375.47873, -199.47751, 367.97873, -81.35254, 274.22873, -76.97754, 209.85373, -6.977539, 84.85376, 1.7724609, 85.47876, -206.97751, 9.85376, -208.22751)
-
-[node name="DockSensor" type="Area2D" parent="Port" unique_id=279076648]
-position = Vector2(626.78674, -716.1251)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Port/DockSensor" unique_id=1564147945]
-position = Vector2(-40.786743, -75.99988)
-shape = SubResource("RectangleShape2D_pkg7o")
-
 [node name="ShopHUD" parent="." unique_id=1208847061 instance=ExtResource("7_pkg7o")]
+visible = false
 
 [node name="MainHUD" parent="." unique_id=1452821638 node_paths=PackedStringArray("player_ship") instance=ExtResource("8_gbfbk")]
 player_ship = NodePath("../Player")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="body_entered" from="Port/DockSensor" to="Port" method="_on_dock_sensor_body_entered"]
-[connection signal="body_exited" from="Port/DockSensor" to="Port" method="_on_dock_sensor_body_exited"]

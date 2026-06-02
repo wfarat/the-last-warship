@@ -2,7 +2,12 @@ extends Node2D
 
 @export var noise_height_text : NoiseTexture2D
 @export var player : Node2D
+@export var port_scene : PackedScene
 var noise : Noise
+
+@export var port_chance : float = 0.05
+@export var SEA_LEVEL : float = 0.4
+@export var GRASS_LEVEL : float = 0.5
 
 # --- Chunk Variables ---
 var CHUNK_SIZE : int = 64 # A chunk is 32x32 tiles
@@ -12,6 +17,7 @@ var UNLOAD_DISTANCE : int = 4 # How many chunks away before we delete it (must b
 
 var active_chunks = {} # A dictionary to remember which chunks are loaded
 var current_player_chunk = Vector2i.ZERO # Tracks the chunk the ship is currently sailing in
+var chunk_entities = {} # Keeps track of spawned scenes per chunk (like ports, enemies, loot)
 
 @onready var water_tilemaplayer: TileMapLayer = $WaterTileMapLayer
 @onready var grass_tilemaplayer: TileMapLayer = $GrassTileMapLayer
@@ -21,7 +27,7 @@ var source_id = 0
 var water_atlas_arr = [Vector2i(2,0),Vector2i(3,0),Vector2i(4,0),Vector2i(5,0),Vector2i(6,0)]
 var grass_atlas_arr = [Vector2i(2,0),Vector2i(3,0),Vector2i(2,2),Vector2i(3,2)]
 var sand_atlas_arr = [Vector2i(6,0),Vector2i(7,0),Vector2i(8,0),Vector2i(9,0)]
-
+var noise_val_arr = []
 func _ready() -> void:
 	noise = noise_height_text.noise
 	#generate_world()
@@ -60,6 +66,10 @@ func generate_chunk(chunk_coord: Vector2i):
 	# Add it to the dictionary so we know it exists
 	active_chunks[chunk_coord] = true
 	
+	var chunk_rng = RandomNumberGenerator.new()
+	chunk_rng.seed = hash(chunk_coord)
+	var has_port = chunk_rng.randf() < port_chance
+	var potential_port_spots = []
 	# Calculate the actual world tile coordinates where this chunk begins
 	var start_x = chunk_coord.x * CHUNK_SIZE
 	var start_y = chunk_coord.y * CHUNK_SIZE
@@ -69,16 +79,33 @@ func generate_chunk(chunk_coord: Vector2i):
 		for y in range(start_y, start_y + CHUNK_SIZE):
 			
 			var noise_val :float = noise.get_noise_2d(x, y)
-			
+			noise_val_arr.append(noise_val)
 			# Place Water
 			water_tilemaplayer.set_cell(Vector2i(x, y), source_id, water_atlas_arr.pick_random())
-			
 			# Place Sand/Grass based on noise
-			if noise_val >= 0.05 and noise_val < 0.1:
+			if noise_val >= SEA_LEVEL and noise_val < GRASS_LEVEL:
 				sand_tilemaplayer.set_cell(Vector2i(x, y), source_id, sand_atlas_arr.pick_random())
-			elif noise_val >= 0.1:
+				if has_port:
+					potential_port_spots.append(Vector2i(x, y))
+			elif noise_val >= GRASS_LEVEL:
 				grass_tilemaplayer.set_cell(Vector2i(x, y), source_id, grass_atlas_arr.pick_random())
-				
+	# Spawn the Port
+	print("pot spots: ", potential_port_spots.size())
+	if has_port and potential_port_spots.size() > 0:
+		# Pick a random sand tile from our list using the seeded RNG
+		var chosen_sand = potential_port_spots[chunk_rng.randi() % potential_port_spots.size()]
+		# Check the 4 tiles around the sand to find the water
+		var directions = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
+		for dir in directions:
+			var neighbor_pos = chosen_sand + dir
+			
+			# If the neighbor's noise means it's water, spawn the port!
+			if noise.get_noise_2d(neighbor_pos.x, neighbor_pos.y) < SEA_LEVEL:
+				spawn_port(neighbor_pos, chunk_coord)
+				break # We found a spot, stop looking
+	print("min: ", noise_val_arr.min())
+	print("max: ", noise_val_arr.max())
+
 func unload_far_chunks():
 	var chunks_to_remove = []
 	
@@ -112,3 +139,30 @@ func remove_chunk(chunk_coord: Vector2i):
 			water_tilemaplayer.erase_cell(tile_pos)
 			sand_tilemaplayer.erase_cell(tile_pos)
 			grass_tilemaplayer.erase_cell(tile_pos)
+	if chunk_entities.has(chunk_coord):
+		for entity in chunk_entities[chunk_coord]:
+			if is_instance_valid(entity):
+				entity.queue_free()
+				
+		chunk_entities.erase(chunk_coord)
+
+func spawn_port(tile_pos: Vector2i, chunk_coord: Vector2i):
+	if port_scene == null:
+		push_warning("Port Scene is not assigned in MapGenerator!")
+		return
+		
+	var port_instance = port_scene.instantiate()
+	
+	# Multiply by tile size to convert abstract grid to pixel space.
+	# We add half the tile size to perfectly center the port on the tile.
+	var offset = Vector2(TILE_SIZE_PIXELS / 2.0, TILE_SIZE_PIXELS / 2.0)
+	port_instance.position = (Vector2(tile_pos) * TILE_SIZE_PIXELS) + offset
+	
+	# Add it to the MapGenerator scene
+	add_child(port_instance)
+	
+	# Store it in our dictionary so we can delete it when the chunk unloads
+	if not chunk_entities.has(chunk_coord):
+		chunk_entities[chunk_coord] = []
+		
+	chunk_entities[chunk_coord].append(port_instance)
