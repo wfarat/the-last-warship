@@ -2585,9 +2585,6 @@ sources/0 = SubResource("TileSetAtlasSource_g3cjp")
 script = ExtResource("1_xlbuu")
 noise_height_text = SubResource("NoiseTexture2D_lcys8")
 port_scene = ExtResource("2_g3cjp")
-port_chance = 0.15
-SEA_LEVEL = 0.35
-GRASS_LEVEL = 0.4
 
 [node name="WaterTileMapLayer" type="TileMapLayer" parent="." unique_id=1822294388]
 tile_set = SubResource("TileSet_xlbuu")
