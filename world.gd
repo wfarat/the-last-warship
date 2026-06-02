@@ -1,8 +1,11 @@
 extends Node2D
-
+var player: Node2D = null
 # This allows you to drag and drop your Enemy scene in the Inspector
 @export var enemy_scene: PackedScene 
-
+func _ready() -> void:
+	# Find the player in the scene tree using the group we created
+	player = get_tree().get_first_node_in_group("Player")
+	
 # This function runs every time the Timer hits 0 (every 3 seconds)
 func _on_timer_timeout() -> void:
 	# 1. Create a new instance of the enemy

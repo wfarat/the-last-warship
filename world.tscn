@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bxgh4r8lwym8l" path="res://hud/port.gd" id="5_dwbse"]
 [ext_resource type="PackedScene" uid="uid://c01wy8faq5jhq" path="res://hud/shop_hud.tscn" id="7_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://c061rjvsys7tf" path="res://hud/main_hud.tscn" id="8_gbfbk"]
+[ext_resource type="PackedScene" uid="uid://dsbsdjlqnwqh" path="res://map_generation.tscn" id="9_ioo17"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pkg7o"]
 size = Vector2(100, 38.25)
@@ -16,7 +17,11 @@ size = Vector2(100, 38.25)
 script = ExtResource("1_tlwt5")
 enemy_scene = ExtResource("2_aqk2v")
 
+[node name="map_generation" parent="." unique_id=1720494624 node_paths=PackedStringArray("player") instance=ExtResource("9_ioo17")]
+player = NodePath("../Player")
+
 [node name="TextureRect" type="TextureRect" parent="." unique_id=26050495]
+visible = false
 texture_repeat = 2
 offset_left = -1122.0
 offset_top = -1032.0
@@ -25,7 +30,7 @@ offset_bottom = 1047.0
 texture = ExtResource("1_fj7yv")
 stretch_mode = 1
 
-[node name="Player" parent="." unique_id=1611458058 groups=["player"] instance=ExtResource("2_tlwt5")]
+[node name="Player" parent="." unique_id=1611458058 instance=ExtResource("2_tlwt5")]
 
 [node name="Timer" type="Timer" parent="." unique_id=554433312]
 wait_time = 3.0
