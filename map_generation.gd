@@ -5,9 +5,9 @@ extends Node2D
 @export var port_scene : PackedScene
 var noise : Noise
 
-@export var port_chance : float = 0.05
-@export var SEA_LEVEL : float = 0.4
-@export var GRASS_LEVEL : float = 0.5
+@export var port_chance : float = 0.15
+@export var SEA_LEVEL : float = 0.35
+@export var GRASS_LEVEL : float = 0.4
 
 # --- Chunk Variables ---
 var CHUNK_SIZE : int = 64 # A chunk is 32x32 tiles
@@ -90,7 +90,7 @@ func generate_chunk(chunk_coord: Vector2i):
 			elif noise_val >= GRASS_LEVEL:
 				grass_tilemaplayer.set_cell(Vector2i(x, y), source_id, grass_atlas_arr.pick_random())
 	# Spawn the Port
-	print("pot spots: ", potential_port_spots.size())
+	#print("pot spots: ", potential_port_spots.size())
 	if has_port and potential_port_spots.size() > 0:
 		# Pick a random sand tile from our list using the seeded RNG
 		var chosen_sand = potential_port_spots[chunk_rng.randi() % potential_port_spots.size()]
@@ -103,8 +103,8 @@ func generate_chunk(chunk_coord: Vector2i):
 			if noise.get_noise_2d(neighbor_pos.x, neighbor_pos.y) < SEA_LEVEL:
 				spawn_port(neighbor_pos, chunk_coord)
 				break # We found a spot, stop looking
-	print("min: ", noise_val_arr.min())
-	print("max: ", noise_val_arr.max())
+	#print("min: ", noise_val_arr.min())
+	#print("max: ", noise_val_arr.max())
 
 func unload_far_chunks():
 	var chunks_to_remove = []
