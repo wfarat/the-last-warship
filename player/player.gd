@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 signal hp_changed(current_hp, max_hp)
-
+@onready var camera_2d: Camera2D = $Camera2D
 const SPEED = 300.0
 const ROTATION_SPEED = 3.0 
 
@@ -58,3 +58,12 @@ func die():
 	
 	# Finally, delete the ship from the game world
 	queue_free()
+
+func _input(event):
+	if Input.is_action_just_pressed("zoom_in"):
+		var zoom_val = camera_2d.zoom.x - 0.1
+		camera_2d.zoom = Vector2(zoom_val, zoom_val)
+  
+	if Input.is_action_just_pressed("zoom_out"):
+		var zoom_val = camera_2d.zoom.x + 0.1
+		camera_2d.zoom = Vector2(zoom_val, zoom_val)

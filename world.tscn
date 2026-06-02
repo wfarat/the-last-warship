@@ -30,7 +30,7 @@ offset_bottom = 1047.0
 texture = ExtResource("1_fj7yv")
 stretch_mode = 1
 
-[node name="Player" parent="." unique_id=1611458058 groups=["player"] instance=ExtResource("2_tlwt5")]
+[node name="Player" parent="." unique_id=1611458058 instance=ExtResource("2_tlwt5")]
 
 [node name="Timer" type="Timer" parent="." unique_id=554433312]
 wait_time = 3.0

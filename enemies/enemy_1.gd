@@ -1,13 +1,33 @@
 extends CharacterBody2D
 
+var player: Node2D = null
 @export var destroyed_image: Texture2D
 @export var xp_reward: int = 25 
 @export var loot_drop_scene: PackedScene
+@export var speed: float = 150.0
+@export var fire_rate: float = 2.0
 var health = 100
 var is_destroyed = false
 
 @onready var sprite = $Sprite2D
 @onready var collision = $CollisionShape2D
+
+func _ready() -> void:
+	# Find the player in the scene tree using the group we created
+	player = get_tree().get_first_node_in_group("player")
+
+func _physics_process(delta: float) -> void:
+	# If the ship is dead, or the player doesn't exist, do nothing
+	if is_destroyed or not player:
+		return
+
+	# --- AI MOVEMENT ---
+	# Calculate the normalized vector pointing from the enemy to the player
+	var target_dir = global_position.direction_to(player.global_position)
+	
+	velocity = target_dir * speed
+	rotation = velocity.angle()
+	move_and_slide()
 
 func take_damage(amount: int):
 	if is_destroyed:

@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://cmn4dj85cxbo3"]
+
+[ext_resource type="Texture2D" uid="uid://bpptsgbijspcd" path="res://textures/weapons/Cannon/Cannon1_color1_3.png" id="1_tdpty"]
+[ext_resource type="Script" uid="uid://u2nqn0h1bdo3" path="res://weapons/enemy_cannon.gd" id="1_wpcgp"]
+[ext_resource type="Texture2D" uid="uid://cckh3sh72cdne" path="res://textures/weapons/Cannon/Cannon1_color1_4.png" id="2_wpcgp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tlo5d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tdpty")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wpcgp")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[node name="enemy_cannon" type="Node2D" unique_id=457571534]
+script = ExtResource("1_wpcgp")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1682340609]
+position = Vector2(18, -1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=652507739]
+position = Vector2(0, -2)
+rotation = -1.5707964
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_tlo5d")
+animation = &"idle"
