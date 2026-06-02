@@ -5,7 +5,7 @@ extends Node2D
 var noise : Noise
 
 # --- Chunk Variables ---
-var CHUNK_SIZE : int = 32 # A chunk is 32x32 tiles
+var CHUNK_SIZE : int = 64 # A chunk is 32x32 tiles
 var TILE_SIZE_PIXELS : int = 16
 var RENDER_DISTANCE : int = 2 # Generates a 5x5 grid of chunks around the player (2 chunks in every direction)
 var UNLOAD_DISTANCE : int = 4 # How many chunks away before we delete it (must be > RENDER_DISTANCE)
@@ -74,9 +74,9 @@ func generate_chunk(chunk_coord: Vector2i):
 			water_tilemaplayer.set_cell(Vector2i(x, y), source_id, water_atlas_arr.pick_random())
 			
 			# Place Sand/Grass based on noise
-			if noise_val >= 0.15 and noise_val < 0.2:
+			if noise_val >= 0.05 and noise_val < 0.1:
 				sand_tilemaplayer.set_cell(Vector2i(x, y), source_id, sand_atlas_arr.pick_random())
-			elif noise_val >= 0.2:
+			elif noise_val >= 0.1:
 				grass_tilemaplayer.set_cell(Vector2i(x, y), source_id, grass_atlas_arr.pick_random())
 				
 func unload_far_chunks():
