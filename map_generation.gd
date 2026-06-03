@@ -8,6 +8,7 @@ var noise : Noise
 @export var port_chance : float = 0.15
 @export var SEA_LEVEL : float = 0.35
 @export var GRASS_LEVEL : float = 0.4
+@export var port_water_offset: float = 64.0 
 
 # --- Chunk Variables ---
 var CHUNK_SIZE : int = 64 # A chunk is 32x32 tiles
@@ -89,23 +90,40 @@ func generate_chunk(chunk_coord: Vector2i):
 					potential_port_spots.append(Vector2i(x, y))
 			elif noise_val >= GRASS_LEVEL:
 				grass_tilemaplayer.set_cell(Vector2i(x, y), source_id, grass_atlas_arr.pick_random())
-	# Spawn the Port
-	#print("pot spots: ", potential_port_spots.size())
+# Spawn the Port
 	if has_port and potential_port_spots.size() > 0:
-		# Pick a random sand tile from our list using the seeded RNG
-		var chosen_sand = potential_port_spots[chunk_rng.randi() % potential_port_spots.size()]
-		# Check the 4 tiles around the sand to find the water
-		var directions = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
-		for dir in directions:
-			var neighbor_pos = chosen_sand + dir
+		
+		# Give it 10 tries to find a good beach. If it fails 10 times, 
+		# this chunk just gets no port (prevents infinite loops!).
+		var attempts = 10 
+		var port_spawned = false
+		
+		while attempts > 0 and not port_spawned:
+			attempts -= 1
 			
-			# If the neighbor's noise means it's water, spawn the port!
-			if noise.get_noise_2d(neighbor_pos.x, neighbor_pos.y) < SEA_LEVEL:
-				spawn_port(neighbor_pos, chunk_coord)
-				break # We found a spot, stop looking
-	#print("min: ", noise_val_arr.min())
-	#print("max: ", noise_val_arr.max())
-
+			# Pick a random sand tile
+			var chosen_sand = potential_port_spots[chunk_rng.randi() % potential_port_spots.size()]
+			var directions = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
+			
+			for dir in directions:
+				# Probe 1, 2, and 3 tiles out into the ocean
+				var step_1 = chosen_sand + dir
+				var step_2 = chosen_sand + (dir * 2)
+				var step_3 = chosen_sand + (dir * 3)
+				
+				# Check if ALL THREE steps are valid water
+				var is_open_ocean = (
+					noise.get_noise_2d(step_1.x, step_1.y) < SEA_LEVEL and
+					noise.get_noise_2d(step_2.x, step_2.y) < SEA_LEVEL and
+					noise.get_noise_2d(step_3.x, step_3.y) < SEA_LEVEL
+				)
+				
+				if is_open_ocean:
+					# We found a clear channel! 
+					# NOTE: We pass 'dir' to the function now!
+					spawn_port(step_1, chunk_coord, dir) 
+					port_spawned = true
+					break # Stop looking in other directions
 func unload_far_chunks():
 	var chunks_to_remove = []
 	
@@ -146,22 +164,32 @@ func remove_chunk(chunk_coord: Vector2i):
 				
 		chunk_entities.erase(chunk_coord)
 
-func spawn_port(tile_pos: Vector2i, chunk_coord: Vector2i):
+
+func spawn_port(tile_pos: Vector2i, chunk_coord: Vector2i, dir: Vector2i) -> void:
 	if port_scene == null:
 		push_warning("Port Scene is not assigned in MapGenerator!")
 		return
 		
 	var port_instance = port_scene.instantiate()
 	
-	# Multiply by tile size to convert abstract grid to pixel space.
-	# We add half the tile size to perfectly center the port on the tile.
-	var offset = Vector2(TILE_SIZE_PIXELS / 2.0, TILE_SIZE_PIXELS / 2.0)
-	port_instance.position = (Vector2(tile_pos) * TILE_SIZE_PIXELS) + offset
+	# 1. Calculate the exact center of the sand tile
+	var base_offset = Vector2(TILE_SIZE_PIXELS / 2.0, TILE_SIZE_PIXELS / 2.0)
+	var center_position = (Vector2(tile_pos) * TILE_SIZE_PIXELS) + base_offset
 	
-	# Add it to the MapGenerator scene
+	# 2. THE NUDGE
+	# Vector2(dir) is already pointing at the water (e.g., Vector2(1, 0) for Right).
+	# Multiplying it by our offset scales that step into pixels!
+	var water_nudge = Vector2(dir) * port_water_offset
+	
+	# Apply both the center position and the nudge
+	port_instance.position = center_position + water_nudge
+	
+	# 3. Rotate the Port
+	port_instance.rotation = Vector2(dir).angle() - (PI / 2.0)	
+	# 4. Add to the World
 	add_child(port_instance)
 	
-	# Store it in our dictionary so we can delete it when the chunk unloads
+	# 5. Store it for chunk unloading
 	if not chunk_entities.has(chunk_coord):
 		chunk_entities[chunk_coord] = []
 		

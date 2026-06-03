@@ -1,11 +1,15 @@
 [gd_scene format=3 uid="uid://ctf5p7iq5ippc"]
 
-[ext_resource type="Script" uid="uid://bxgh4r8lwym8l" path="res://hud/port.gd" id="1_hl5ak"]
+[ext_resource type="Script" uid="uid://bxgh4r8lwym8l" path="res://misc/port.gd" id="1_hl5ak"]
 [ext_resource type="Texture2D" uid="uid://upjpwlpfwyaa" path="res://textures/port.png" id="2_waw7x"]
 [ext_resource type="PackedScene" uid="uid://c01wy8faq5jhq" path="res://hud/shop_hud.tscn" id="3_y6gts"]
+[ext_resource type="Script" uid="uid://b8eew5fb1dwjc" path="res://misc/teleport_zone.gd" id="4_gs6wo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pkg7o"]
 size = Vector2(100, 38.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_57wis"]
+size = Vector2(885, 565)
 
 [node name="Port" type="StaticBody2D" unique_id=1364598985 node_paths=PackedStringArray("shop_hud")]
 z_index = 1
@@ -18,9 +22,9 @@ scale = Vector2(1.6, 1.6)
 texture = ExtResource("2_waw7x")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=265174050]
-position = Vector2(-78.99997, 249.99994)
+position = Vector2(-100, 243)
 scale = Vector2(1.6, 1.6)
-polygon = PackedVector2Array(9.85376, 5.522461, -285.1462, 29.89746, -276.3962, -56.97754, -202.64621, -116.97754, -202.64621, -193.85251, -165.14622, -212.60251, -113.896225, -293.8525, -48.27124, -325.1025, 206.72873, -319.4775, 228.60373, -306.9775, 322.35373, -299.4775, 331.10373, -258.2275, 331.10373, -196.97751, 375.47873, -199.47751, 367.97873, -81.35254, 274.22873, -76.97754, 209.85373, -6.977539, 84.85376, 1.7724609, 85.47876, -206.97751, 9.85376, -208.22751)
+polygon = PackedVector2Array(9.85376, 5.522461, -285.1462, 29.89746, -276.3962, -56.97754, -202.64621, -116.97754, -202.64621, -193.85251, -165.14622, -212.60251, -113.896225, -293.8525, -48.27124, -325.1025, 206.72873, -319.4775, 228.60373, -306.9775, 322.35373, -299.4775, 331.10373, -258.2275, 331.10373, -196.97751, 375.47873, -199.47751, 367.97873, -81.35254, 274.22873, -76.97754, 209.85373, -6.977539, 113.749985, -2.5, 114.999985, -213.12497, 11.874996, -211.87497)
 
 [node name="DockSensor" type="Area2D" parent="." unique_id=1525961969]
 position = Vector2(8, -11)
@@ -31,5 +35,19 @@ shape = SubResource("RectangleShape2D_pkg7o")
 
 [node name="ShopHUD" parent="." unique_id=1208847061 instance=ExtResource("3_y6gts")]
 
+[node name="DockMarker" type="Marker2D" parent="." unique_id=1362429411]
+position = Vector2(1, 47)
+rotation = -0.018498182
+
+[node name="TeleportZone" type="Area2D" parent="." unique_id=1916191479 node_paths=PackedStringArray("dock_target")]
+script = ExtResource("4_gs6wo")
+dock_target = NodePath("../DockMarker")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone" unique_id=1296689903]
+position = Vector2(27.5, 2.5)
+shape = SubResource("RectangleShape2D_57wis")
+
 [connection signal="body_entered" from="DockSensor" to="." method="_on_dock_sensor_body_entered"]
 [connection signal="body_exited" from="DockSensor" to="." method="_on_dock_sensor_body_exited"]
+[connection signal="body_entered" from="TeleportZone" to="TeleportZone" method="_on_body_entered"]
+[connection signal="body_exited" from="TeleportZone" to="TeleportZone" method="_on_body_exited"]
