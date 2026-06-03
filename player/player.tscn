@@ -33,6 +33,7 @@ position = Vector2(-16, -15)
 
 [node name="Cannon" parent="Slots/SlotMidLeft" unique_id=673055562 instance=ExtResource("3_i3pqv")]
 position = Vector2(0, -3)
+rotation = -1.5735325
 
 [node name="SlotMidRight" type="Marker2D" parent="Slots" unique_id=832235718]
 position = Vector2(16, -17)

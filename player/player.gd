@@ -37,7 +37,12 @@ func install_cannon(slot_index: int, new_cannon_scene: PackedScene):
 	# 2. Spawn the new cannon blueprint
 	var new_cannon = new_cannon_scene.instantiate()
 	
-	# 3. Add it to the exact Marker2D slot
+	if slot_index % 2 == 0:
+		new_cannon.rotation_degrees = -90 # Point Left
+	else:
+		new_cannon.rotation_degrees = 90  # Point Right
+		
+	# 4. Add it to the exact Marker2D slot
 	target_slot.add_child(new_cannon)
 
 func take_damage(amount: int):
