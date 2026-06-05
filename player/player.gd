@@ -8,6 +8,15 @@ const ROTATION_SPEED = 3.0
 var max_hp: int = 100
 var current_hp: int = 100
 
+@onready var skill_manager = $SkillManager
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("skill_1"):
+		if skill_manager.get_child_count() > 0:
+			var skill = skill_manager.get_child(0)
+			
+			skill.execute(self)
+			
 func _physics_process(delta: float) -> void:
 	# Just steering and driving!
 	var turn_direction := Input.get_axis("ui_left", "ui_right")

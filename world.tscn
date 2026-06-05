@@ -16,7 +16,6 @@ player = NodePath("../Player")
 [node name="Player" parent="." unique_id=1611458058 instance=ExtResource("2_tlwt5")]
 
 [node name="Timer" type="Timer" parent="." unique_id=554433312]
-wait_time = 3.0
 autostart = true
 
 [node name="MainHUD" parent="." unique_id=1452821638 node_paths=PackedStringArray("player_ship") instance=ExtResource("8_gbfbk")]

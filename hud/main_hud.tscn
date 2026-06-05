@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c061rjvsys7tf"]
 
 [ext_resource type="Script" uid="uid://4txyccmp6c75" path="res://hud/main_hud.gd" id="1_0d230"]
+[ext_resource type="PackedScene" uid="uid://dkxgfkbyadynt" path="res://skills/skill_icon.tscn" id="2_66u2k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0d230"]
 bg_color = Color(0.12941177, 0.12941177, 0.12941177, 1)
@@ -47,3 +48,26 @@ custom_minimum_size = Vector2(400, 40)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_lkse2")
 theme_override_styles/fill = SubResource("StyleBoxFlat_b71xr")
+
+[node name="SkillBar" type="MarginContainer" parent="." unique_id=471310222]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+offset_right = 64.0
+grow_vertical = 0
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_bottom = 80
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SkillBar" unique_id=282461792]
+layout_mode = 2
+
+[node name="LPM" type="VBoxContainer" parent="SkillBar/HBoxContainer" unique_id=1082992578]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SkillBar/HBoxContainer/LPM" unique_id=369216259]
+layout_mode = 2
+text = "Mouse left"
+
+[node name="SkillIcon" parent="SkillBar/HBoxContainer/LPM" unique_id=370953250 instance=ExtResource("2_66u2k")]
+layout_mode = 2

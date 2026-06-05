@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://6arrnj41h0jc"]
+
+[ext_resource type="Script" uid="uid://vac2s5wr4f6r" path="res://skills/magic_skill.gd" id="1_cbdj2"]
+[ext_resource type="PackedScene" uid="uid://pc6j3mwdhmoh" path="res://skills/magic_shot.tscn" id="2_75nhw"]
+
+[node name="MagicSkill" type="Node" unique_id=1381354035]
+script = ExtResource("1_cbdj2")
+magic_scene = ExtResource("2_75nhw")

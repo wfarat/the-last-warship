@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dkxgfkbyadynt"]
+
+[ext_resource type="Texture2D" uid="uid://dsjjpo1itheqc" path="res://skills/icon/magic_shot_sm.png" id="1_xb3gg"]
+[ext_resource type="Script" uid="uid://d0rkb7f34ks4v" path="res://skills/skill_icon.gd" id="2_w4eki"]
+
+[sub_resource type="Gradient" id="Gradient_6q84w"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0, 0, 0, 0.5882353)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5xc6o"]
+gradient = SubResource("Gradient_6q84w")
+
+[node name="SkillIcon" type="TextureProgressBar" unique_id=370953250]
+step = 0.01
+fill_mode = 1
+texture_under = ExtResource("1_xb3gg")
+texture_progress = SubResource("GradientTexture2D_5xc6o")
+script = ExtResource("2_w4eki")

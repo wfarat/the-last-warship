@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://7pl24p7tjjtv" path="res://textures/body_01.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://b5ar7jna6sdoa" path="res://player/player.gd" id="1_onrkg"]
 [ext_resource type="PackedScene" uid="uid://c2d3jxv55vmdo" path="res://weapons/cannon.tscn" id="3_i3pqv"]
+[ext_resource type="Script" uid="uid://cqp0mk4flrn6m" path="res://player/skill_manager.gd" id="4_yw30f"]
+[ext_resource type="PackedScene" uid="uid://6arrnj41h0jc" path="res://skills/magic_skill.tscn" id="5_g6k8r"]
+[ext_resource type="PackedScene" uid="uid://pc6j3mwdhmoh" path="res://skills/magic_shot.tscn" id="6_boad6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(100, 250)
@@ -43,3 +46,9 @@ position = Vector2(-16, 16)
 
 [node name="SlotBotRight" type="Marker2D" parent="Slots" unique_id=1997675383]
 position = Vector2(16, 15)
+
+[node name="SkillManager" type="Node" parent="." unique_id=1815309374]
+script = ExtResource("4_yw30f")
+
+[node name="MagicSkill" parent="SkillManager" unique_id=1381354035 instance=ExtResource("5_g6k8r")]
+magic_scene = ExtResource("6_boad6")
