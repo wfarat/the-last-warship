@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpptsgbijspcd"
-path="res://.godot/imported/Cannon1_color1_3.png-a3cc1c38575e4b519a68429dc21987d7.ctex"
+uid="uid://wpyqk7lj1320"
+path="res://.godot/imported/Cannon1_color1_2.png-34db92970edf8ad35c711c3d417cc32e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/weapons/Cannon/Cannon1_color1_3.png"
-dest_files=["res://.godot/imported/Cannon1_color1_3.png-a3cc1c38575e4b519a68429dc21987d7.ctex"]
+source_file="res://textures/enemies/Cannon1_color1/Cannon1_color1_2.png"
+dest_files=["res://.godot/imported/Cannon1_color1_2.png-34db92970edf8ad35c711c3d417cc32e.ctex"]
 
 [params]
 
