@@ -5,8 +5,8 @@ signal hp_changed(health, max_hp)
 const SPEED = 300.0
 const ROTATION_SPEED = 3.0 
 
-var max_hp: int = 100
-var health: int = 100
+var max_hp: int = 10000
+var health: int = 10000
 
 @onready var skill_manager = $SkillManager
 

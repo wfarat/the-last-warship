@@ -29,4 +29,4 @@ position = Vector2(-11, 0)
 [node name="Marker2D" type="Marker2D" parent="slot" unique_id=90581750]
 
 [node name="enemy_cannon" parent="slot/Marker2D" unique_id=457571534 instance=ExtResource("5_fshb8")]
-position = Vector2(-1, 0)
+position = Vector2(5.9604645e-08, 2.3841858e-07)

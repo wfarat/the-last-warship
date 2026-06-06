@@ -30,12 +30,10 @@ script = ExtResource("1_wpcgp")
 bullet_scene = ExtResource("2_tlo5d")
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=1682340609]
-position = Vector2(-29, -1.2676303e-06)
-rotation = 1.5707964
+position = Vector2(0.27052236, 30.99882)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=652507739]
-position = Vector2(-10, 0.99999946)
-rotation = 1.5707964
+position = Vector2(1.0959536, 10.990854)
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_tlo5d")
 animation = &"idle"

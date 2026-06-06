@@ -1,16 +1,21 @@
 extends CharacterBody2D
 
 var player: Node2D = null
-@export var destroyed_image: Texture2D
-@export var xp_reward: int = 25 
-@export var loot_drop_scene: PackedScene
-@export var speed: float = 150.0
+
+@export_group("Stats")
+@export var health: int = 100
+@export var speed: float = 100.0
+@export var turn_speed: float = 2.0 # NEW: How fast it rotates. Lower = more sluggish!
 @export var fire_rate: float = 2.0
-var health = 100
-var is_destroyed = false
+@export var xp_reward: int = 25
+
+@export_group("Assets")
+@export var destroyed_image: Texture2D
+@export var loot_drop_scene: PackedScene
 
 @onready var sprite = $Sprite2D
 @onready var collision = $CollisionShape2D
+var is_destroyed = false
 
 func _ready() -> void:
 	# Find the player in the scene tree using the group we created
@@ -20,13 +25,13 @@ func _physics_process(delta: float) -> void:
 	# If the ship is dead, or the player doesn't exist, do nothing
 	if is_destroyed or not player:
 		return
-
 	# --- AI MOVEMENT ---
 	# Calculate the normalized vector pointing from the enemy to the player
 	var target_dir = global_position.direction_to(player.global_position)
+	var target_angle = target_dir.angle()
 	
-	velocity = target_dir * speed
-	rotation = velocity.angle()
+	rotation = lerp_angle(rotation, target_angle, turn_speed * delta)
+	velocity = Vector2.RIGHT.rotated(rotation) * speed
 	move_and_slide()
 
 func take_damage(amount: int):
@@ -53,7 +58,7 @@ func explode():
 		chest.global_position = global_position 
 		
 		# Add the chest to the main game world (not as a child of the dying enemy!)
-		get_tree().current_scene.add_child(chest)
+		get_tree().current_scene.call_deferred("add_child", chest)
 	# ---------------------------
 	collision.set_deferred("disabled", true)
 	remove_from_group("enemies")

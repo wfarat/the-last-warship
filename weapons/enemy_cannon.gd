@@ -4,7 +4,7 @@ class_name EnemyCannon
 @export_group("Targeting & AI")
 @export var target_group: String = "player" # "enemies" for player guns, "player" for enemy guns
 @export var max_range: float = 600.0 # Don't target things beyond this pixel distance
-@export var traverse_arc_degrees: float = 180.0
+@export var traverse_arc_degrees: float = 360.0
 
 @export_group("Stats & Tiers")
 @export var tier_fire_rates: Array[float] = [0.5, 0.35, 0.2] 
@@ -22,7 +22,7 @@ var current_cooldown: float = 0.0
 # This stores the direction the cannon was originally placed in the editor!
 var base_local_rotation: float 
 
-@onready var muzzle = $Muzzle
+@onready var muzzle: Marker2D = $Muzzle
 
 func _ready() -> void:
 	# Save the resting angle of the weapon so we know what "forward" is for this specific gun
@@ -70,32 +70,16 @@ func get_closest_target() -> Node2D:
 func aim_at_target(target_pos: Vector2) -> void:
 	# Calculate where the gun WANTS to look
 	var angle_to_target = global_position.direction_to(target_pos).angle()
-	var desired_global_rotation = angle_to_target + (PI / 2.0)
-	
+	var desired_global_rotation = angle_to_target - (PI / 2.0)
 	# Apply the rotation temporarily
 	global_rotation = desired_global_rotation
-	
-	# THE CLAMP: Force the gun back inside its allowed turning arc
-	var half_traverse = deg_to_rad(traverse_arc_degrees) / 2.0
-	
-	# Wrapf keeps the math from breaking when rotating past 360 degrees
-	var angle_diff = wrapf(rotation - base_local_rotation, -PI, PI)
-	
-	# Clamp the difference so it can't turn further than the allowed arc
-	var clamped_diff = clamp(angle_diff, -half_traverse, half_traverse)
-	
-	# Apply the locked rotation!
-	rotation = base_local_rotation + clamped_diff
-
-
 
 # --- SHOOTING & UPGRADES ---
-
 func shoot():
 	if not bullet_scene: return 
 	var spawned_bullet = bullet_scene.instantiate()
 	spawned_bullet.global_position = muzzle.global_position
-	spawned_bullet.global_rotation = global_rotation
+	spawned_bullet.global_rotation = global_rotation - PI
 	spawned_bullet.damage = damage
 	spawned_bullet.target_group = target_group
 	get_tree().current_scene.add_child(spawned_bullet)
