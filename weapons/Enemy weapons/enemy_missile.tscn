@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://qnxvh3jhaouv"]
+
+[ext_resource type="Script" uid="uid://u2nqn0h1bdo3" path="res://weapons/Enemy weapons/enemy_cannon.gd" id="1_a4n4f"]
+[ext_resource type="Texture2D" uid="uid://2awe4i6xmae4" path="res://textures/enemies/Cannon2_color2/Cannon2_color2_1.png" id="1_xne68"]
+[ext_resource type="PackedScene" uid="uid://6w4surus0i42" path="res://weapons/missile.tscn" id="2_k50mo"]
+[ext_resource type="Texture2D" uid="uid://dcmp3y4m1f1i5" path="res://textures/enemies/Cannon2_color2/Cannon2_color2_2.png" id="2_nancc"]
+[ext_resource type="Texture2D" uid="uid://dwiythxh53ooa" path="res://textures/enemies/Cannon2_color2/Cannon2_color2_3.png" id="3_a4n4f"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k50mo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xne68")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_nancc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_a4n4f")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[node name="EnemyMissile" type="Node2D" unique_id=1846065429]
+rotation = -1.5707964
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_a4n4f")
+bullet_scene = ExtResource("2_k50mo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1419240873]
+position = Vector2(-5.2453663e-07, 12)
+sprite_frames = SubResource("SpriteFrames_k50mo")
+animation = &"idle"
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1287047521]
+position = Vector2(1.3333309, 54.666668)

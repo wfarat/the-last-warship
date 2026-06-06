@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://cmn4dj85cxbo3"]
 
-[ext_resource type="Texture2D" uid="uid://bpptsgbijspcd" path="res://textures/weapons/Cannon/Cannon1_color1_3.png" id="1_tdpty"]
-[ext_resource type="Script" uid="uid://u2nqn0h1bdo3" path="res://weapons/enemy_cannon.gd" id="1_wpcgp"]
-[ext_resource type="PackedScene" uid="uid://8c8m0padffa7" path="res://weapons/bullet.tscn" id="2_tlo5d"]
-[ext_resource type="Texture2D" uid="uid://cckh3sh72cdne" path="res://textures/weapons/Cannon/Cannon1_color1_4.png" id="2_wpcgp"]
+[ext_resource type="Script" uid="uid://u2nqn0h1bdo3" path="res://weapons/Enemy weapons/enemy_cannon.gd" id="1_wdvrr"]
+[ext_resource type="PackedScene" uid="uid://8c8m0padffa7" path="res://weapons/bullet.tscn" id="2_raut3"]
+[ext_resource type="Texture2D" uid="uid://bpptsgbijspcd" path="res://textures/enemies/Cannon1_color1_3.png" id="3_0ju6s"]
+[ext_resource type="Texture2D" uid="uid://cckh3sh72cdne" path="res://textures/enemies/Cannon1_color1_4.png" id="4_342af"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tlo5d"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_tdpty")
+"texture": ExtResource("3_0ju6s")
 }],
 "loop": true,
 "name": &"idle",
@@ -17,7 +17,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_wpcgp")
+"texture": ExtResource("4_342af")
 }],
 "loop": true,
 "name": &"shoot",
@@ -26,8 +26,8 @@ animations = [{
 
 [node name="enemy_cannon" type="Node2D" unique_id=457571534]
 rotation = -1.5707964
-script = ExtResource("1_wpcgp")
-bullet_scene = ExtResource("2_tlo5d")
+script = ExtResource("1_wdvrr")
+bullet_scene = ExtResource("2_raut3")
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=1682340609]
 position = Vector2(0.27052236, 30.99882)
