@@ -34,7 +34,7 @@ func _ready() -> void:
 	#generate_world()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if player:
 		update_chunks()
 
@@ -194,3 +194,13 @@ func spawn_port(tile_pos: Vector2i, chunk_coord: Vector2i, dir: Vector2i) -> voi
 		chunk_entities[chunk_coord] = []
 		
 	chunk_entities[chunk_coord].append(port_instance)
+
+func is_water(global_pixel_position: Vector2) -> bool:
+	var tile_x = floor(global_pixel_position.x / TILE_SIZE_PIXELS)
+	var tile_y = floor(global_pixel_position.y / TILE_SIZE_PIXELS)
+	
+	#Check the noise at that exact tile
+	var noise_val = noise.get_noise_2d(tile_x, tile_y)
+	
+	#Return true if it's below your established sea level
+	return noise_val < SEA_LEVEL

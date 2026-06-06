@@ -73,7 +73,7 @@ func die():
 	# Finally, delete the ship from the game world
 	queue_free()
 
-func _input(event):
+func _input(_event):
 	if Input.is_action_just_pressed("zoom_in"):
 		var zoom_val = camera_2d.zoom.x - 0.1
 		camera_2d.zoom = Vector2(zoom_val, zoom_val)
