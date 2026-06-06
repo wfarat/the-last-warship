@@ -1,12 +1,12 @@
 extends CharacterBody2D
 
-signal hp_changed(current_hp, max_hp)
+signal hp_changed(health, max_hp)
 @onready var camera_2d: Camera2D = $Camera2D
 const SPEED = 300.0
 const ROTATION_SPEED = 3.0 
 
 var max_hp: int = 100
-var current_hp: int = 100
+var health: int = 100
 
 @onready var skill_manager = $SkillManager
 
@@ -55,10 +55,10 @@ func install_cannon(slot_index: int, new_cannon_scene: PackedScene):
 	target_slot.add_child(new_cannon)
 
 func take_damage(amount: int):
-	current_hp -= amount
-	hp_changed.emit(current_hp, max_hp)
+	health -= amount
+	hp_changed.emit(health, max_hp)
 	
-	if current_hp <= 0:
+	if health <= 0:
 		die()
 
 func die():	
