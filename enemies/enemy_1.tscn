@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bmjxdwk4mhkmp" path="res://textures/enemies/Boats_color1/Boat_color1_1.png" id="2_663o1"]
 [ext_resource type="Texture2D" uid="uid://cnxlss0juffck" path="res://textures/enemies/Broken_asset/Broken_asset1.png" id="2_ovk8a"]
 [ext_resource type="PackedScene" uid="uid://d0lxq08ypcew3" path="res://misc/chest.tscn" id="3_8dj5n"]
+[ext_resource type="PackedScene" uid="uid://cmn4dj85cxbo3" path="res://weapons/enemy_cannon.tscn" id="5_fshb8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ovk8a"]
 radius = 17.87
@@ -21,3 +22,11 @@ texture = ExtResource("2_663o1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1307947528 groups=["enemies"]]
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_ovk8a")
+
+[node name="slot" type="Node2D" parent="." unique_id=49331360]
+position = Vector2(-11, 0)
+
+[node name="Marker2D" type="Marker2D" parent="slot" unique_id=90581750]
+
+[node name="enemy_cannon" parent="slot/Marker2D" unique_id=457571534 instance=ExtResource("5_fshb8")]
+position = Vector2(5.9604645e-08, 2.3841858e-07)

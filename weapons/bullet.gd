@@ -8,6 +8,7 @@ var distance_traveled: float = 0.0
 var damage: int = 20
 
 @onready var sprite = $AnimatedSprite2D
+var target_group: String = ""
 
 # 1. _ready() runs exactly ONCE the moment the rocket is created
 func _ready() -> void:
@@ -24,7 +25,7 @@ func _physics_process(delta: float) -> void:
 		detonate()
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemies"):
+	if body.is_in_group(target_group):
 		if body.has_method("take_damage"):
 			body.take_damage(damage)
 			

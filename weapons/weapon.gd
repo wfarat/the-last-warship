@@ -105,6 +105,7 @@ func shoot():
 	spawned_bullet.global_position = muzzle.global_position
 	spawned_bullet.global_rotation = global_rotation
 	spawned_bullet.damage = damage
+	spawned_bullet.target_group = target_group
 	get_tree().current_scene.add_child(spawned_bullet)
 	play_shoot_effects()
 

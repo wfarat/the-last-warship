@@ -23,7 +23,7 @@ func _ready() -> void:
 	_update_xp_display(PlayerData.xp, PlayerData.xp_to_next_level)
 	
 	if player_ship:
-		_update_hp_display(player_ship.current_hp, player_ship.max_hp)
+		_update_hp_display(player_ship.health, player_ship.max_hp)
 	call_deferred("_setup_skills")
 
 # --- THE UPDATE FUNCTIONS ---
@@ -39,9 +39,9 @@ func _update_xp_display(current_xp: int, max_xp: int) -> void:
 	xp_bar.max_value = max_xp
 	xp_bar.value = current_xp
 
-func _update_hp_display(current_hp: int, max_hp: int) -> void:
+func _update_hp_display(health: int, max_hp: int) -> void:
 	hp_bar.max_value = max_hp
-	hp_bar.value = current_hp
+	hp_bar.value = health
 
 func _setup_skills() -> void:
 	if not player_ship: return
