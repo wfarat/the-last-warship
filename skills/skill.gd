@@ -36,7 +36,7 @@ func execute(caster: Node2D) -> void:
 
 # --- VIRTUAL FUNCTIONS (To be overridden by child scripts) ---
 
-func activate_effect(caster: Node2D) -> void:
+func activate_effect(_caster: Node2D) -> void:
 	pass # Child scripts replace this with explosions, dashes, etc.
 
 func upgrade() -> void:
