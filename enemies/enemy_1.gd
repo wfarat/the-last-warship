@@ -6,7 +6,6 @@ var player: Node2D = null
 @export var health: int = 100
 @export var speed: float = 100.0
 @export var turn_speed: float = 2.0 # NEW: How fast it rotates. Lower = more sluggish!
-@export var fire_rate: float = 2.0
 @export var xp_reward: int = 25
 
 @export_group("Assets")

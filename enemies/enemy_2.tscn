@@ -11,6 +11,9 @@ height = 126.0
 [node name="Enemy2" type="CharacterBody2D" unique_id=2111006410]
 scale = Vector2(1.2, 1.2)
 script = ExtResource("1_yqrne")
+health = 150
+speed = 50.0
+turn_speed = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=161248867]
 position = Vector2(2, 0)
@@ -28,3 +31,5 @@ position = Vector2(-3, 2)
 [node name="Marker2D" type="Marker2D" parent="Node2D" unique_id=1641437437]
 
 [node name="EnemyMissile" parent="Node2D/Marker2D" unique_id=1846065429 instance=ExtResource("2_sx3gy")]
+fire_rate = 5.0
+damage = 50
