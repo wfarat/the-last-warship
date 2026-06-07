@@ -8,9 +8,10 @@
 radius = 22.0
 height = 126.0
 
-[node name="Enemy2" type="CharacterBody2D" unique_id=2111006410]
+[node name="Enemy2" type="CharacterBody2D" unique_id=2111006410 groups=["enemies"]]
 scale = Vector2(1.2, 1.2)
 script = ExtResource("1_yqrne")
+health = 200
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=161248867]
 position = Vector2(2, 0)
