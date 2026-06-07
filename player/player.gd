@@ -16,6 +16,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			var skill = skill_manager.get_child(0)
 			
 			skill.execute(self)
+	if event.is_action_pressed("skill_2"):
+		if skill_manager.get_child_count() > 0:
+			var skill = skill_manager.get_child(1)
+			
+			skill.execute(self)
 			
 func _physics_process(delta: float) -> void:
 	# Just steering and driving!
@@ -60,7 +65,11 @@ func take_damage(amount: int):
 	
 	if health <= 0:
 		die()
-
+		
+func heal(amount: int) -> void:
+	health = min(health + amount, max_hp)
+	hp_changed.emit(health, max_hp)
+	
 func die():	
 	# Optional: You could spawn an explosion scene right here!
 	

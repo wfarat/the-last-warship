@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c2d3jxv55vmdo" path="res://weapons/cannon.tscn" id="3_i3pqv"]
 [ext_resource type="Script" uid="uid://cqp0mk4flrn6m" path="res://player/skill_manager.gd" id="4_yw30f"]
 [ext_resource type="PackedScene" uid="uid://6arrnj41h0jc" path="res://skills/magic_skill.tscn" id="5_g6k8r"]
+[ext_resource type="PackedScene" uid="uid://kyqdi6c58t23" path="res://skills/heal_skill.tscn" id="6_g6k8r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(100, 250)
@@ -50,3 +51,5 @@ position = Vector2(16, 15)
 script = ExtResource("4_yw30f")
 
 [node name="MagicSkill" parent="SkillManager" unique_id=1381354035 instance=ExtResource("5_g6k8r")]
+
+[node name="HealSkill" parent="SkillManager" unique_id=731127652 instance=ExtResource("6_g6k8r")]

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://kyqdi6c58t23"]
+
+[ext_resource type="Script" uid="uid://dan2c7rqrnotr" path="res://skills/heal_skill.gd" id="1_ejqpk"]
+[ext_resource type="Texture2D" uid="uid://yi6bhw3nkbr1" path="res://skills/icon/repair_sm.png" id="2_0xtd3"]
+[ext_resource type="PackedScene" uid="uid://c1jp1w6ub8bty" path="res://skills/heal_effect.tscn" id="2_1u67s"]
+
+[node name="HealSkill" type="Node" unique_id=731127652]
+script = ExtResource("1_ejqpk")
+heal_effect_scene = ExtResource("2_1u67s")
+icon = ExtResource("2_0xtd3")

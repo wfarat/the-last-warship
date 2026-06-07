@@ -12,7 +12,6 @@ tier_animations = Array[SpriteFrames]([ExtResource("1_roivt"), ExtResource("3_7v
 tier_damage = Array[int]([35, 50, 80])
 tier_price = Array[int]([600, 1200, 1800])
 bullet_scene = ExtResource("5_xw5cg")
-damage = 35
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=1944629134]
 position = Vector2(0, -13)

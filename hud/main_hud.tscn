@@ -62,12 +62,8 @@ theme_override_constants/margin_bottom = 80
 [node name="HBoxContainer" type="HBoxContainer" parent="SkillBar" unique_id=282461792]
 layout_mode = 2
 
-[node name="LPM" type="VBoxContainer" parent="SkillBar/HBoxContainer" unique_id=1082992578]
+[node name="SkillIcon" parent="SkillBar/HBoxContainer" unique_id=370953250 instance=ExtResource("2_66u2k")]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="SkillBar/HBoxContainer/LPM" unique_id=369216259]
-layout_mode = 2
-text = "Mouse left"
-
-[node name="SkillIcon" parent="SkillBar/HBoxContainer/LPM" unique_id=370953250 instance=ExtResource("2_66u2k")]
+[node name="SkillIcon2" parent="SkillBar/HBoxContainer" unique_id=834971573 instance=ExtResource("2_66u2k")]
 layout_mode = 2

@@ -4,7 +4,7 @@ extends CanvasLayer
 @onready var level_label = $MarginContainer/VBoxContainer/LevelLabel
 @onready var xp_bar = $MarginContainer/VBoxContainer/XPBar
 @onready var hp_bar = $MarginContainer/VBoxContainer/HPBar
-@onready var first_skill_icon = $SkillBar/HBoxContainer/LPM/SkillIcon
+@onready var icon_container = $SkillBar/HBoxContainer
 @export var player_ship: CharacterBody2D 
 
 func _ready() -> void:
@@ -46,10 +46,24 @@ func _update_hp_display(health: int, max_hp: int) -> void:
 func _setup_skills() -> void:
 	if not player_ship: return
 	
-	# Find the SkillManager on the player
 	var skill_manager = player_ship.get_node_or_null("SkillManager")
+	if not skill_manager: return
 	
-	if skill_manager and skill_manager.get_child_count() > 0:
-		var skill_1 = skill_manager.get_child(0)
+	# Grab lists of both the UI slots and the actual equipped skills
+	var ui_slots = icon_container.get_children()
+	var equipped_skills = skill_manager.get_children()
+	
+	# 2. THE DYNAMIC LOOP
+	# Go through every single UI slot we placed in the editor...
+	for i in range(ui_slots.size()):
+		var icon = ui_slots[i]
 		
-		first_skill_icon.assign_skill(skill_1)
+		# Does the player actually have a skill for this slot?
+		if i < equipped_skills.size():
+			# Yes! Assign the skill to the icon and make sure it's visible.
+			icon.assign_skill(equipped_skills[i])
+			icon.show() 
+		else:
+			# No! The player only has 1 skill, but we have 4 UI slots.
+			# Hide the extra empty slots so the screen looks clean.
+			icon.hide()

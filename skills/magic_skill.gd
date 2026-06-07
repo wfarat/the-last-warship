@@ -16,7 +16,7 @@ func activate_effect(caster: Node2D) -> void:
 	
 	# 3. SET POSITIONING AFTER ADDING TO TREE
 	magic.global_position = caster.global_position
-	magic.global_rotation = caster.global_position.direction_to(magic.target_position).angle()
+	magic.global_rotation = caster.global_position.direction_to(magic.target_position).angle() + PI
 
 func apply_upgrade_stats() -> void:
 	damage += 30
