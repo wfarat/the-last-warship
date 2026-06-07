@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://vac2s5wr4f6r" path="res://skills/magic_skill.gd" id="1_cbdj2"]
 [ext_resource type="PackedScene" uid="uid://pc6j3mwdhmoh" path="res://skills/magic_shot.tscn" id="2_75nhw"]
+[ext_resource type="Texture2D" uid="uid://dsjjpo1itheqc" path="res://skills/icon/magic_shot_sm.png" id="3_mtl1b"]
 
 [node name="MagicSkill" type="Node" unique_id=1381354035]
 script = ExtResource("1_cbdj2")
 magic_scene = ExtResource("2_75nhw")
+icon = ExtResource("3_mtl1b")

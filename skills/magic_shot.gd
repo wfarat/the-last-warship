@@ -19,6 +19,7 @@ func _physics_process(delta: float) -> void:
 		var step = speed * delta
 		global_position = global_position.move_toward(target_position, step)
 		
+		
 		if global_position == target_position:
 			explode()
 
