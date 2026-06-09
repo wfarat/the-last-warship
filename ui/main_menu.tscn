@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://imrlkwe00jfq"]
+
+[ext_resource type="Script" uid="uid://ipdtfuhvl2fu" path="res://ui/main_menu.gd" id="1_t7e0r"]
+[ext_resource type="Texture2D" uid="uid://ews81f2h6b0d" path="res://ui/tlo.png" id="2_0dkrt"]
+[ext_resource type="FontFile" uid="uid://drggthakjyl8q" path="res://ui/BebasNeue-Regular.ttf" id="3_wk0pr"]
+
+[node name="MainMenu" type="Control" unique_id=1822113565]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t7e0r")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1238973912]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_0dkrt")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1872366629]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -434.0
+offset_top = -218.0
+offset_bottom = 218.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_right = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1091315352]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="NewGameButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=962631824]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_wk0pr")
+theme_override_font_sizes/font_size = 96
+text = "New game"
+
+[node name="LoadButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=2097551783]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_wk0pr")
+theme_override_font_sizes/font_size = 96
+text = "Load game"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=2003343744]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_wk0pr")
+theme_override_font_sizes/font_size = 96
+text = "Quit game"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/NewGameButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
