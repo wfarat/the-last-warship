@@ -10,6 +10,29 @@ var health: int = 10000
 
 @onready var skill_manager = $SkillManager
 
+func _ready() -> void:
+	if not PlayerData.saved_ship_data.is_empty():
+		var ship_data = PlayerData.saved_ship_data
+		
+		global_position.x = ship_data.get("global_position_x", 0.0)
+		global_position.y = ship_data.get("global_position_y", 0.0)
+		health = ship_data.get("hp", max_hp)
+		
+		var saved_weapons = ship_data.get("weapons", [])
+		for weapon_info in saved_weapons:
+			var slot_idx = weapon_info["slot_index"]
+			var cannon_scene = load(weapon_info["scene_path"])
+			
+			if cannon_scene:
+				install_cannon(slot_idx, cannon_scene)
+				var installed_cannon = $Slots.get_child(slot_idx).get_child(0)
+				
+				for t in range(weapon_info["tier"]):
+					if installed_cannon.has_method("upgrade_tier"):
+						installed_cannon.upgrade_tier()
+		
+		PlayerData.saved_ship_data = {}
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("skill_1"):
 		if skill_manager.get_child_count() > 0:
@@ -90,3 +113,28 @@ func _input(_event):
 	if Input.is_action_just_pressed("zoom_out"):
 		var zoom_val = camera_2d.zoom.x + 0.1
 		camera_2d.zoom = Vector2(zoom_val, zoom_val)
+		
+		
+func get_save_data() -> Dictionary:
+	var weapons_data = []
+	var slots_folder = $Slots
+	
+	var slots = slots_folder.get_children()
+	for i in range(slots.size()):
+		var slot = slots[i]
+		if slot.get_child_count() > 0:
+			var weapon = slot.get_child(0)
+			
+			var weapon_info = {
+				"slot_index": i,
+				"scene_path": weapon.scene_file_path,
+				"tier": weapon.current_tier
+			}
+			weapons_data.append(weapon_info)
+	
+	return {
+		"weapons": weapons_data,
+		"hp": health,
+		"global_position_x": global_position.x,
+		"global_position_y": global_position.y
+	}

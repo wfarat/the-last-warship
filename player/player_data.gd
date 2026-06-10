@@ -9,7 +9,7 @@ var gold: int = 1000
 var level: int = 1
 var xp: int = 0
 var xp_to_next_level: int = 100
-
+var saved_ship_data: Dictionary = {}
 func add_gold(amount: int):
 	gold += amount
 	gold_changed.emit(gold)

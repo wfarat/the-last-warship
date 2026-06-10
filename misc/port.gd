@@ -12,6 +12,7 @@ func _on_dock_sensor_body_entered(body: Node2D) -> void:
 		can_shop = false # Flip the switch OFF so it can't trigger again
 		
 		shop_hud.open_shop(body) 
+		GameManager.save_game()
 		get_tree().paused = true
 
 
