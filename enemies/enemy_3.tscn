@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c5utx6i63xkk6"]
+
+[ext_resource type="Texture2D" uid="uid://iksfc41aagi4" path="res://textures/enemies/Boat3_water_animation_color3/Boat3_water_frame1.png" id="1_bk5a0"]
+[ext_resource type="Script" uid="uid://cujnkxd73d7aj" path="res://enemies/enemy_3.gd" id="1_ja7cc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ja7cc"]
+radius = 36.0
+height = 106.0
+
+[node name="Enemy3" type="CharacterBody2D" unique_id=1158870669]
+script = ExtResource("1_ja7cc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=495451204]
+rotation = -1.5707964
+texture = ExtResource("1_bk5a0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1189370479]
+position = Vector2(-2, -1)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_ja7cc")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=815333329]
+rotation = -1.5707964
