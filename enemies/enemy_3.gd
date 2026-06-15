@@ -15,17 +15,20 @@ var current_state: State = State.CHASE
 @export var charge_speed: float = 400.0
 @export var windup_time: float = 0.6 # Gives player time to react!
 @export var charge_duration: float = 1.5 # How long the charge lasts if they miss
-@export var cooldown_time: float = 3.0
+@export var cooldown_time: float = 10.0
 @export var base_ram_damage: float = 10.0
 @export var speed_damage_multiplier: float = 0.1 # Extra damage per unit of speed
 
 var state_timer: float = 0.0
 var is_destroyed: bool = false
 
+@export var destroyed_image: Texture2D
+@export var loot_drop_scene: PackedScene
+
 @onready var sprite = $Sprite2D
 @onready var collision = $CollisionShape2D
 @onready var vision_ray: RayCast2D = $RayCast2D
-@onready var charge_effect: AnimatedSprite2D = $ChargeEffect
+@onready var charge_effect: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
@@ -105,7 +108,7 @@ func change_state(new_state: State):
 			charge_effect.play("windup") # Optional windup animation
 		State.CHARGE:
 			state_timer = charge_duration
-			charge_effect.play("charging")
+			#charge_effect.play("charging")
 		State.COOLDOWN:
 			state_timer = cooldown_time
 			charge_effect.hide()
@@ -137,5 +140,34 @@ func handle_ram_impact():
 			break
 
 func take_damage(amount: int):
-	# (Your existing take_damage and explode functions go here!)
-	pass
+	if is_destroyed:
+		return 
+		
+	health -= amount
+	
+	if health <= 0:
+		explode()
+
+func explode():
+	is_destroyed = true
+	
+	PlayerData.add_xp(xp_reward)
+	
+	if destroyed_image:
+		sprite.texture = destroyed_image
+		# --- NEW LOOT DROP LOGIC ---
+	if loot_drop_scene:
+		var chest = loot_drop_scene.instantiate()
+		
+		# Set the chest's location to be exactly where the enemy died
+		chest.global_position = global_position 
+		
+		# Add the chest to the main game world (not as a child of the dying enemy!)
+		get_tree().current_scene.call_deferred("add_child", chest)
+	# ---------------------------
+	collision.set_deferred("disabled", true)
+	remove_from_group("enemies")
+	
+	await get_tree().create_timer(1.0).timeout
+	
+	queue_free()
