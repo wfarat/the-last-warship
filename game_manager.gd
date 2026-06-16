@@ -6,17 +6,24 @@ var current_state: GameState = GameState.MENU
 const SAVE_PATH = "user://save_data.json"
 
 var world = "res://world.tscn" 
-var main_menu_path = "res://main_menu.tscn"
-
+var main_menu_path = "res://ui/main_menu.tscn"
+var game_over_path = "res://ui/game_over.tscn"
 
 func start_new_game():
 	PlayerData.gold = 0
 	PlayerData.xp = 0
 	PlayerData.level = 1
-	
+	ScoreManager.start_run()
 	change_state(GameState.PLAYING)
 	get_tree().change_scene_to_file(world)
 
+func game_over() -> void:
+	ScoreManager.stop_run()
+	ScoreManager.save_current_score() # Zapisujemy wynik do JSON
+	
+	change_state(GameState.GAME_OVER)
+	get_tree().change_scene_to_file(game_over_path)
+	
 func go_to_menu():
 	change_state(GameState.MENU)
 	get_tree().paused = false

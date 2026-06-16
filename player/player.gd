@@ -94,15 +94,7 @@ func heal(amount: int) -> void:
 	hp_changed.emit(health, max_hp)
 	
 func die():	
-	# Optional: You could spawn an explosion scene right here!
-	
-	# Option 1: Freeze the game immediately
-	get_tree().paused = true
-	
-	# Option 2: Load a completely separate Game Over menu scene
-	# get_tree().change_scene_to_file("res://game_over_screen.tscn")
-	
-	# Finally, delete the ship from the game world
+	GameManager.call_deferred("game_over")	
 	queue_free()
 
 func _input(_event):

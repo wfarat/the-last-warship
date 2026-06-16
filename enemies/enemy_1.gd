@@ -47,7 +47,7 @@ func explode():
 	is_destroyed = true
 	
 	PlayerData.add_xp(xp_reward)
-	
+	ScoreManager.add_kill()
 	if destroyed_image:
 		sprite.texture = destroyed_image
 		# --- NEW LOOT DROP LOGIC ---
