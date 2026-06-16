@@ -123,9 +123,15 @@ func get_save_data() -> Dictionary:
 				"tier": weapon.current_tier
 			}
 			weapons_data.append(weapon_info)
-	
+	var skills_data = []
+	for skill in $SkillManager.get_children():
+		skills_data.append({
+			"scene_path": skill.scene_file_path,
+			"level": skill.current_level
+		})
 	return {
 		"weapons": weapons_data,
+		"skills": skills_data,
 		"hp": health,
 		"global_position_x": global_position.x,
 		"global_position_y": global_position.y

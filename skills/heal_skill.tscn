@@ -8,3 +8,4 @@
 script = ExtResource("1_ejqpk")
 heal_effect_scene = ExtResource("2_1u67s")
 icon = ExtResource("2_0xtd3")
+max_level = 9

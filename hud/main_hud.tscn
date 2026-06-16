@@ -65,5 +65,15 @@ layout_mode = 2
 [node name="SkillIcon" parent="SkillBar/HBoxContainer" unique_id=370953250 instance=ExtResource("2_66u2k")]
 layout_mode = 2
 
+[node name="LevelLabel" type="Label" parent="SkillBar/HBoxContainer/SkillIcon" unique_id=1163110977]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="SkillIcon2" parent="SkillBar/HBoxContainer" unique_id=834971573 instance=ExtResource("2_66u2k")]
 layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="SkillBar/HBoxContainer/SkillIcon2" unique_id=120211326]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
