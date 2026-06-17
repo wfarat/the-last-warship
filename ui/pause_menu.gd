@@ -30,8 +30,7 @@ func _on_save_button_pressed() -> void:
 	$MenuContainer/SaveButton.text = "ZAPISANO!"
 
 func _on_settings_button_pressed() -> void:
-	print("Otwieram ustawienia...")
-	# np. SettingsMenu.show() 
+	GlobalSettings.show()
 
 func _on_menu_button_pressed() -> void:
 	get_tree().paused = false

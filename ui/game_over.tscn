@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://mlayna7vn807" path="res://control.gd" id="1_5eixk"]
 [ext_resource type="Texture2D" uid="uid://tww7wn025qbl" path="res://ui/game_over.png" id="2_j1fe5"]
 [ext_resource type="FontFile" uid="uid://drggthakjyl8q" path="res://ui/BebasNeue-Regular.ttf" id="2_xjda6"]
-[ext_resource type="AudioStream" uid="uid://c2ekosc5q0kog" path="res://sounds/outro.mp3" id="4_xjda6"]
 
 [node name="GameOver" type="Control" unique_id=73474887]
 layout_mode = 3
@@ -59,9 +58,5 @@ offset_bottom = 825.0
 theme_override_fonts/font = ExtResource("2_xjda6")
 theme_override_font_sizes/font_size = 96
 text = "MENU"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=535314939]
-stream = ExtResource("4_xjda6")
-autoplay = true
 
 [connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]

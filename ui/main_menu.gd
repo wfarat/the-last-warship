@@ -46,5 +46,8 @@ func _on_play_button_pressed() -> void:
 func _on_load_button_pressed() -> void:
 	GameManager.load_game()
 
+func _on_settings_button_pressed() -> void:
+	GlobalSettings.show()
+	
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()

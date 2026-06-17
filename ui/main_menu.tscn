@@ -62,6 +62,12 @@ theme_override_fonts/font = ExtResource("3_wk0pr")
 theme_override_font_sizes/font_size = 96
 text = "Load game"
 
+[node name="SettingsButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1880998021]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_wk0pr")
+theme_override_font_sizes/font_size = 96
+text = "Settings"
+
 [node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=2003343744]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_wk0pr")
@@ -107,5 +113,6 @@ text = "close"
 [connection signal="pressed" from="MarginContainer/VBoxContainer/NewGameButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HighscoresButton" to="." method="_on_highscores_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="ScoresPanel/VBoxContainer/CloseButton" to="." method="_on_close_scores_button_pressed"]

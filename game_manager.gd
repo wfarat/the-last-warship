@@ -4,7 +4,7 @@ enum GameState { MENU, PLAYING, PAUSED, GAME_OVER }
 var current_state: GameState = GameState.MENU
 
 const SAVE_PATH = "user://save_data.json"
-
+signal state_changed(new_state)
 var world = "res://world.tscn" 
 var main_menu_path = "res://ui/main_menu.tscn"
 var game_over_path = "res://ui/game_over.tscn"
@@ -30,7 +30,7 @@ func go_to_menu():
 
 func change_state(new_state: GameState):
 	current_state = new_state
-	print("Zmieniono stan gry na: ", GameState.keys()[current_state])
+	state_changed.emit(current_state)
 
 
 func save_game() -> void:
