@@ -18,6 +18,8 @@ var current_state: State = State.CHASE
 @export var cooldown_time: float = 10.0
 @export var base_ram_damage: float = 10.0
 @export var speed_damage_multiplier: float = 0.1 # Extra damage per unit of speed
+@export var initial_spawn_cooldown: float = 3.0 # Waits 3 seconds after spawning
+var spawn_timer: float = initial_spawn_cooldown
 
 var state_timer: float = 0.0
 var is_destroyed: bool = false
@@ -60,16 +62,28 @@ func _physics_process(delta: float) -> void:
 # --- STATE LOGIC ---
 
 func process_chase(delta: float):
-	# Standard sluggish movement
 	var target_dir = global_position.direction_to(player.global_position)
 	rotation = lerp_angle(rotation, target_dir.angle(), turn_speed * delta)
-	velocity = Vector2.RIGHT.rotated(rotation) * speed
 	
-	# Check if we have a clear line of sight to start a charge
+	# NOTE: If your ship's sprite is drawn facing UP, change Vector2.RIGHT to Vector2.UP!
+	var forward_vector = Vector2.RIGHT.rotated(rotation) 
+	velocity = forward_vector * speed
+	
+	# 1. Handle the Spawn Cooldown
+	if spawn_timer > 0:
+		spawn_timer -= delta
+		return # Skip the attack checks until the timer is done!
+	
+	# 2. Check Line of Sight
 	if vision_ray.is_colliding():
 		var hit_object = vision_ray.get_collider()
 		if hit_object == player:
-			change_state(State.WINDUP)
+			
+			# 3. FIX THE MISS: Check if the ship is actually pointing at the player
+			# .dot() compares the direction the ship is facing with the direction to the player.
+			# > 0.98 means it's aiming within a very tight cone (almost perfectly straight ahead).
+			if forward_vector.dot(target_dir) > 0.98:
+				change_state(State.WINDUP)
 
 func process_windup(delta: float):
 	# Stop moving, lock rotation, and prepare to fire!
