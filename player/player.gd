@@ -96,8 +96,10 @@ func heal(amount: int) -> void:
 	hp_changed.emit(health, max_hp)
 	
 func die():	
-	GameManager.call_deferred("game_over")	
-	queue_free()
+	if (GameManager.current_state != GameManager.GameState.GAME_OVER):
+		GameManager.change_state(GameManager.GameState.GAME_OVER)
+		GameManager.call_deferred("game_over")	
+		queue_free()
 
 func _input(_event):
 	if Input.is_action_just_pressed("zoom_in"):

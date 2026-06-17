@@ -21,7 +21,6 @@ func game_over() -> void:
 	ScoreManager.stop_run()
 	ScoreManager.save_current_score() # Zapisujemy wynik do JSON
 	
-	change_state(GameState.GAME_OVER)
 	get_tree().change_scene_to_file(game_over_path)
 	
 func go_to_menu():
