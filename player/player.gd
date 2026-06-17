@@ -34,6 +34,8 @@ func _ready() -> void:
 		PlayerData.saved_ship_data = {}
 
 func _unhandled_input(event: InputEvent) -> void:
+	if GameManager.current_state != GameManager.GameState.PLAYING:
+		return
 	if event.is_action_pressed("skill_1"):
 		if skill_manager.get_child_count() > 0:
 			var skill = skill_manager.get_child(0)
