@@ -31,7 +31,6 @@ var sand_atlas_arr = [Vector2i(6,0),Vector2i(7,0),Vector2i(8,0),Vector2i(9,0)]
 var noise_val_arr = []
 func _ready() -> void:
 	noise = noise_height_text.noise
-	#generate_world()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

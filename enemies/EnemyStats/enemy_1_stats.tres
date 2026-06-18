@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://ctyq01cbyuo2x"]
+
+[ext_resource type="Texture2D" uid="uid://cnxlss0juffck" path="res://textures/enemies/Broken_asset/Broken_asset1.png" id="1_wvg0y"]
+[ext_resource type="Script" uid="uid://thp3acewco8y" path="res://enemies/EnemyStats/enemy_stats.gd" id="2_an402"]
+
+[resource]
+script = ExtResource("2_an402")
+destroyed_image = ExtResource("1_wvg0y")
+metadata/_custom_type_script = "uid://thp3acewco8y"

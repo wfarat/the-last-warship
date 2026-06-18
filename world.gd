@@ -9,7 +9,7 @@ extends Node2D
 
 @export_group("Boss Settings")
 @export var boss_scene: PackedScene
-@export var levels_between_bosses: int = 1
+@export var levels_between_bosses: int = 5
 
 @onready var player = $Player
 @onready var map_generation: Node2D = $map_generation

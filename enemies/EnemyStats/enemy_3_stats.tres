@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://b5v57gtsb7ap1"]
+
+[ext_resource type="Texture2D" uid="uid://cu3andvie2jq0" path="res://textures/enemies/Broken_asset/Broken_asset3.png" id="1_4h3yd"]
+[ext_resource type="Script" uid="uid://thp3acewco8y" path="res://enemies/EnemyStats/enemy_stats.gd" id="1_nf135"]
+
+[resource]
+script = ExtResource("1_nf135")
+max_health = 200
+speed = 60.0
+turn_speed = 1.2
+xp_reward = 40
+destroyed_image = ExtResource("1_4h3yd")
+metadata/_custom_type_script = "uid://thp3acewco8y"

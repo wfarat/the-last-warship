@@ -2,11 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://cw6payu2k3vf3" path="res://textures/enemies/boss_main.png" id="1_qf2do"]
 [ext_resource type="Script" uid="uid://vmpqcnp6p0g5" path="res://enemies/enemy_boss.gd" id="1_yxpds"]
+[ext_resource type="Resource" uid="uid://q6mttjhbeg1f" path="res://enemies/EnemyStats/boss_stats.tres" id="2_c6415"]
 [ext_resource type="PackedScene" uid="uid://c3l7qhkt61jua" path="res://weapons/Enemy weapons/boss_cannon.tscn" id="3_8fsp4"]
 
 [node name="EnemyBoss" type="CharacterBody2D" unique_id=2066353621 groups=["enemies"]]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_yxpds")
+stats = ExtResource("2_c6415")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1449173980]
 position = Vector2(0, 1)
