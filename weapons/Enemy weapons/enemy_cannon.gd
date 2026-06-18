@@ -6,18 +6,15 @@ class_name EnemyCannon
 @export var max_range: float = 600.0 # Don't target things beyond this pixel distance
 @export var traverse_arc_degrees: float = 360.0
 
-@export_group("Stats & Tiers")
-@export var tier_fire_rates: Array[float] = [0.5, 0.35, 0.2] 
-@export var tier_damage: Array[int] = [20, 30, 45]
-@export var tier_price: Array[int] = [300, 600, 900]
-var current_tier: int = 0
+@export_group("Stats")
+@export var fire_rate: float = 0.5 
+@export var damage: int = 20
+@export var fire_cooldown: float = 0.0
 
 @export_group("Components")
 @export var bullet_scene: PackedScene 
 
-var fire_rate: float = 0.5 
-var damage: int = 20
-var current_cooldown: float = 0.0
+
 
 # This stores the direction the cannon was originally placed in the editor!
 var base_local_rotation: float 
@@ -30,8 +27,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# 1. Handle Cooldown
-	if current_cooldown > 0.0:
-		current_cooldown -= delta
+	if fire_cooldown > 0.0:
+		fire_cooldown -= delta
 		
 	# 2. Find the closest valid target
 	var target = get_closest_target()
@@ -40,9 +37,9 @@ func _physics_process(delta: float) -> void:
 		aim_at_target(target.global_position)
 		
 		# 3. Only shoot if cooldown is ready AND the gun is actually pointing at the target!
-		if current_cooldown <= 0.0:
+		if fire_cooldown <= 0.0:
 			shoot()
-			current_cooldown = fire_rate
+			fire_cooldown = fire_rate
 
 # --- TARGETING LOGIC ---
 
