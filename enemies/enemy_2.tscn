@@ -13,6 +13,8 @@ height = 126.0
 scale = Vector2(1.2, 1.2)
 collision_layer = 2
 collision_mask = 17
+motion_mode = 1
+safe_margin = 0.2
 script = ExtResource("1_yqrne")
 stats = ExtResource("2_eakan")
 
