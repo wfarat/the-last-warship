@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c061rjvsys7tf" path="res://hud/main_hud.tscn" id="8_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://c6f1431jtmtrt" path="res://ui/level_up_screen.tscn" id="8_ioo17"]
 [ext_resource type="PackedScene" uid="uid://dsbsdjlqnwqh" path="res://map_generation.tscn" id="9_ioo17"]
+[ext_resource type="PackedScene" uid="uid://4tx82gj446j" path="res://ui/pause_menu.tscn" id="9_wse8f"]
 
 [node name="World" type="Node2D" unique_id=634803544]
 script = ExtResource("1_tlwt5")
@@ -27,10 +28,9 @@ autostart = true
 [node name="MainHUD" parent="." unique_id=1452821638 node_paths=PackedStringArray("player_ship") instance=ExtResource("8_gbfbk")]
 player_ship = NodePath("../Player")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1078978160]
-stream = ExtResource("7_pkg7o")
-autoplay = true
-
 [node name="LevelUpScreen" parent="." unique_id=1312727963 instance=ExtResource("8_ioo17")]
+
+[node name="PauseMenu" parent="." unique_id=1850373770 instance=ExtResource("9_wse8f")]
+z_index = 10
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

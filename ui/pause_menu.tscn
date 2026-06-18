@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://4tx82gj446j"]
+
+[ext_resource type="Texture2D" uid="uid://8wrech3jeovv" path="res://ui/pause_menu.png" id="1_50142"]
+[ext_resource type="Script" uid="uid://bev7tijrqn4gd" path="res://ui/pause_menu.gd" id="1_ejwgg"]
+[ext_resource type="FontFile" uid="uid://drggthakjyl8q" path="res://ui/BebasNeue-Regular.ttf" id="3_fob5h"]
+
+[node name="PauseMenu" type="Control" unique_id=1850373770]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ejwgg")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1538876174]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -860.0
+offset_top = -440.0
+offset_right = 1956.0
+offset_bottom = 1096.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_50142")
+
+[node name="MenuContainer" type="VBoxContainer" parent="." unique_id=1108384419]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -156.0
+offset_top = -95.0
+offset_right = 114.0
+offset_bottom = 202.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ContinueButton" type="Button" parent="MenuContainer" unique_id=884559170]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fob5h")
+theme_override_font_sizes/font_size = 48
+text = "Continue"
+
+[node name="SaveButton" type="Button" parent="MenuContainer" unique_id=2021809450]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fob5h")
+theme_override_font_sizes/font_size = 48
+text = "Save game"
+
+[node name="SettingsButton" type="Button" parent="MenuContainer" unique_id=734879022]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fob5h")
+theme_override_font_sizes/font_size = 48
+text = "settings"
+
+[node name="MenuButton" type="Button" parent="MenuContainer" unique_id=764225508]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fob5h")
+theme_override_font_sizes/font_size = 48
+text = "Go to menu"
+
+[connection signal="pressed" from="MenuContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="MenuContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="MenuContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MenuButton" to="." method="_on_menu_button_pressed"]
