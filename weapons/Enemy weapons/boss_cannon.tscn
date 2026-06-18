@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c3l7qhkt61jua"]
+
+[ext_resource type="Texture2D" uid="uid://c6eqi3l8wv6t2" path="res://textures/enemies/boss_gun.png" id="1_u5tj3"]
+[ext_resource type="Script" uid="uid://ecqe8rttxbmr" path="res://weapons/Enemy weapons/boss_cannon.gd" id="1_uyg22"]
+[ext_resource type="PackedScene" uid="uid://8c8m0padffa7" path="res://weapons/bullet.tscn" id="2_gx4da"]
+
+[node name="boss_cannon" type="Node2D" unique_id=599933623]
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_uyg22")
+bullet_scene = ExtResource("2_gx4da")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=887416192]
+position = Vector2(0, -40)
+rotation = 3.1415927
+texture = ExtResource("1_u5tj3")
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=2040847849]
+position = Vector2(1.6666641, -120)

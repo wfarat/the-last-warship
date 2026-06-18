@@ -1,14 +1,18 @@
 [gd_scene format=3 uid="uid://71msi1u0pofy"]
 
 [ext_resource type="Script" uid="uid://b5sjbqcurswsk" path="res://world.gd" id="1_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://ddgu0rl3doq8t" path="res://enemies/enemy_boss.tscn" id="2_036b0"]
+[ext_resource type="PackedScene" uid="uid://gmeu4xj4lf0t" path="res://enemies/enemy_1.tscn" id="2_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://bri7yap8eeu7j" path="res://player/player.tscn" id="2_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://bpwnt7xoh260o" path="res://enemies/enemy_2.tscn" id="3_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://c5utx6i63xkk6" path="res://enemies/enemy_3.tscn" id="4_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://c061rjvsys7tf" path="res://hud/main_hud.tscn" id="8_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://dsbsdjlqnwqh" path="res://map_generation.tscn" id="9_ioo17"]
 
 [node name="World" type="Node2D" unique_id=634803544]
 script = ExtResource("1_tlwt5")
-enemy_scenes = Array[PackedScene]([ExtResource("4_pkg7o")])
+enemy_scenes = Array[PackedScene]([ExtResource("2_pkg7o"), ExtResource("3_gbfbk"), ExtResource("4_pkg7o")])
+boss_scene = ExtResource("2_036b0")
 
 [node name="map_generation" parent="." unique_id=1720494624 node_paths=PackedStringArray("player") instance=ExtResource("9_ioo17")]
 player = NodePath("../Player")
