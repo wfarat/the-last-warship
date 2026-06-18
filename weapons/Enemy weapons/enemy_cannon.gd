@@ -9,21 +9,23 @@ class_name EnemyCannon
 @export_group("Stats")
 @export var fire_rate: float = 0.5 
 @export var damage: int = 20
-@export var fire_cooldown: float = 0.0
+@export var damage_scale_per_level: float = 0.05
 
 @export_group("Components")
-@export var bullet_scene: PackedScene 
-
-
+@export var bullet_scene: PackedScene
 
 # This stores the direction the cannon was originally placed in the editor!
-var base_local_rotation: float 
-
+var base_local_rotation: float
+var fire_cooldown: float = 0.0 
+var current_damage: int
 @onready var muzzle: Marker2D = $Muzzle
 
 func _ready() -> void:
 	# Save the resting angle of the weapon so we know what "forward" is for this specific gun
 	base_local_rotation = rotation
+	var p_level = PlayerData.level
+	var damage_multiplier = 1.0 + (p_level * damage_scale_per_level)
+	current_damage = damage * damage_multiplier
 
 func _physics_process(delta: float) -> void:
 	# 1. Handle Cooldown
@@ -77,7 +79,7 @@ func shoot():
 	var spawned_bullet = bullet_scene.instantiate()
 	spawned_bullet.global_position = muzzle.global_position
 	spawned_bullet.global_rotation = global_rotation - PI
-	spawned_bullet.damage = damage
+	spawned_bullet.damage = current_damage
 	spawned_bullet.target_group = target_group
 	get_tree().current_scene.add_child(spawned_bullet)
 	play_shoot_effects()

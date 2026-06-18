@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var player: Node2D = null
 @export var stats: Resource
+@export var health_scale_per_level: float = 0.15
 
 @onready var cannon = $slot
 @onready var sprite = $Sprite2D
@@ -13,6 +14,9 @@ func _ready() -> void:
 	# Find the player in the scene tree using the group we created
 	health = stats.max_health
 	player = get_tree().get_first_node_in_group("player")
+	var p_level = PlayerData.level
+	var health_multiplier = 1.0 + (p_level * health_scale_per_level)
+	health = int(stats.max_health * health_multiplier)
 
 func _physics_process(delta: float) -> void:
 	# If the ship is dead, or the player doesn't exist, do nothing

@@ -1378,7 +1378,8 @@ texture = ExtResource("2_b2p3l")
 25:49/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_g3cjp"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 16
+physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_xlbuu")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g3cjp"]
@@ -2578,7 +2579,8 @@ texture = ExtResource("2_b2p3l")
 25:49/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_lcys8"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 16
+physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_g3cjp")
 
 [node name="map_generation" type="Node2D" unique_id=1720494624]

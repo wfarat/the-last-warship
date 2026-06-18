@@ -11,6 +11,8 @@ height = 107.18
 
 [node name="Enemy1" type="CharacterBody2D" unique_id=1087080966 groups=["enemies"]]
 scale = Vector2(0.8, 0.8)
+collision_layer = 2
+collision_mask = 17
 script = ExtResource("1_pjquw")
 stats = ExtResource("2_8dj5n")
 

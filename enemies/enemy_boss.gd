@@ -6,6 +6,9 @@ var player: Node2D = null
 
 var is_destroyed = false
 var health: int
+@onready var cannon = $slots
+@onready var sprite = $Sprite2D
+@onready var collision = $CollisionPolygon2D
 
 func _ready() -> void:
 	health = stats.max_health
@@ -45,6 +48,15 @@ func take_damage(amount: int):
 
 func explode():
 	is_destroyed = true
+	cannon.queue_free()
 	PlayerData.add_xp(stats.xp_reward)
-	# Add explosion effects and loot drops!
+	ScoreManager.add_kill()
+	if stats.destroyed_image:
+		sprite.texture = stats.destroyed_image
+	GameManager.spawn_loot(global_position)
+	collision.set_deferred("disabled", true)
+	remove_from_group("enemies")
+	
+	await get_tree().create_timer(3.0).timeout
+	
 	queue_free()

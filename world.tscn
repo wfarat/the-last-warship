@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bri7yap8eeu7j" path="res://player/player.tscn" id="2_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://bpwnt7xoh260o" path="res://enemies/enemy_2.tscn" id="3_dwbse"]
 [ext_resource type="PackedScene" uid="uid://c5utx6i63xkk6" path="res://enemies/enemy_3.tscn" id="4_pkg7o"]
-[ext_resource type="AudioStream" uid="uid://d1olulrjv81t0" path="res://sounds/The_Figurehead’s_Vigil.mp3" id="7_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://c061rjvsys7tf" path="res://hud/main_hud.tscn" id="8_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://c6f1431jtmtrt" path="res://ui/level_up_screen.tscn" id="8_ioo17"]
 [ext_resource type="PackedScene" uid="uid://dsbsdjlqnwqh" path="res://map_generation.tscn" id="9_ioo17"]
@@ -31,6 +30,5 @@ player_ship = NodePath("../Player")
 [node name="LevelUpScreen" parent="." unique_id=1312727963 instance=ExtResource("8_ioo17")]
 
 [node name="PauseMenu" parent="." unique_id=1850373770 instance=ExtResource("9_wse8f")]
-z_index = 10
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
