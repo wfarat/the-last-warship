@@ -20,3 +20,4 @@ func activate_effect(caster: Node2D) -> void:
 
 func apply_upgrade_stats() -> void:
 	damage += 30
+	base_cooldown -= 0.5

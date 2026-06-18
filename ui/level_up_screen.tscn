@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://c6f1431jtmtrt"]
+
+[ext_resource type="Script" uid="uid://0n4i3l1idufi" path="res://ui/level_up_screen.gd" id="1_i5ge7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6rllb"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="LevelUpScreen" type="CanvasLayer" unique_id=1312727963]
+process_mode = 3
+script = ExtResource("1_i5ge7")
+
+[node name="Panel" type="Panel" parent="." unique_id=126323536]
+custom_minimum_size = Vector2(600, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6rllb")
+
+[node name="OptionsContainer" type="HBoxContainer" parent="Panel" unique_id=392113618]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

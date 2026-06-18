@@ -19,6 +19,7 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 PlayerData="*uid://ctppg7tyd4p64"
 SaveManager="*uid://c2u40e8o35wk1"
 GameManager="*uid://jd6a1uyxhovx"
+ScoreManager="*uid://di1ghmmwaaddt"
 
 [display]
 

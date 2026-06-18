@@ -34,6 +34,8 @@ func _ready() -> void:
 		PlayerData.saved_ship_data = {}
 
 func _unhandled_input(event: InputEvent) -> void:
+	if GameManager.current_state != GameManager.GameState.PLAYING:
+		return
 	if event.is_action_pressed("skill_1"):
 		if skill_manager.get_child_count() > 0:
 			var skill = skill_manager.get_child(0)
@@ -94,16 +96,10 @@ func heal(amount: int) -> void:
 	hp_changed.emit(health, max_hp)
 	
 func die():	
-	# Optional: You could spawn an explosion scene right here!
-	
-	# Option 1: Freeze the game immediately
-	get_tree().paused = true
-	
-	# Option 2: Load a completely separate Game Over menu scene
-	# get_tree().change_scene_to_file("res://game_over_screen.tscn")
-	
-	# Finally, delete the ship from the game world
-	queue_free()
+	if (GameManager.current_state != GameManager.GameState.GAME_OVER):
+		GameManager.change_state(GameManager.GameState.GAME_OVER)
+		GameManager.call_deferred("game_over")	
+		queue_free()
 
 func _input(_event):
 	if Input.is_action_just_pressed("zoom_in"):
@@ -131,9 +127,15 @@ func get_save_data() -> Dictionary:
 				"tier": weapon.current_tier
 			}
 			weapons_data.append(weapon_info)
-	
+	var skills_data = []
+	for skill in $SkillManager.get_children():
+		skills_data.append({
+			"scene_path": skill.scene_file_path,
+			"level": skill.current_level
+		})
 	return {
 		"weapons": weapons_data,
+		"skills": skills_data,
 		"hp": health,
 		"global_position_x": global_position.x,
 		"global_position_y": global_position.y

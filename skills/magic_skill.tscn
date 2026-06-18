@@ -8,3 +8,4 @@
 script = ExtResource("1_cbdj2")
 magic_scene = ExtResource("2_75nhw")
 icon = ExtResource("3_mtl1b")
+max_level = 9

@@ -20,4 +20,4 @@ func activate_effect(caster: Node2D) -> void:
 func apply_upgrade_stats() -> void:
 	heal_amount += 1000
 	
-	base_cooldown = max(3.0, base_cooldown - 1.0)
+	base_cooldown -= 0.5
