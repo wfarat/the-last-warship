@@ -7,20 +7,17 @@
 [ext_resource type="PackedScene" uid="uid://6arrnj41h0jc" path="res://skills/magic_skill.tscn" id="5_g6k8r"]
 [ext_resource type="PackedScene" uid="uid://kyqdi6c58t23" path="res://skills/heal_skill.tscn" id="6_g6k8r"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
-size = Vector2(100, 250)
-
 [node name="Player" type="CharacterBody2D" unique_id=1611458058 groups=["player"]]
 z_index = 5
 collision_mask = 18
+safe_margin = 0.2
 script = ExtResource("1_onrkg")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1726745509]
 texture = ExtResource("1_4flbx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=810710367]
-position = Vector2(0, -1)
-shape = SubResource("RectangleShape2D_onrkg")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=873091026]
+polygon = PackedVector2Array(46, -97, 46, -30, 37, -22, 37, 27, 53, 57, 53, 89, 37, 105, 37, 114, 23, 128, -23, 128, -38, 114, -38, 105, -53, 89, -53, 59, -38, 29, -38, -23, -46, -31, -46, -98, -16, -129, 16, -128)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=731443005]
 

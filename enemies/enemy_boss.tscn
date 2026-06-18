@@ -9,6 +9,8 @@
 scale = Vector2(1.5, 1.5)
 collision_layer = 2
 collision_mask = 17
+motion_mode = 1
+safe_margin = 0.2
 script = ExtResource("1_yxpds")
 stats = ExtResource("2_c6415")
 
