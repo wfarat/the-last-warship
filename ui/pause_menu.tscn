@@ -4,70 +4,57 @@
 [ext_resource type="Script" uid="uid://bev7tijrqn4gd" path="res://ui/pause_menu.gd" id="1_ejwgg"]
 [ext_resource type="FontFile" uid="uid://drggthakjyl8q" path="res://ui/BebasNeue-Regular.ttf" id="3_fob5h"]
 
-[node name="PauseMenu" type="Control" unique_id=1850373770]
-layout_mode = 3
+[node name="PauseMenu" type="CanvasLayer" unique_id=904356173]
+script = ExtResource("1_ejwgg")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1393480605]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ejwgg")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1538876174]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -860.0
-offset_top = -440.0
-offset_right = 1956.0
-offset_bottom = 1096.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.6, 0.6)
+[node name="TextureRect" type="TextureRect" parent="CenterContainer" unique_id=1538876174]
+layout_mode = 2
 texture = ExtResource("1_50142")
+stretch_mode = 5
 
-[node name="MenuContainer" type="VBoxContainer" parent="." unique_id=1108384419]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -156.0
-offset_top = -95.0
-offset_right = 114.0
-offset_bottom = 202.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer" unique_id=1576260000]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 10
 
-[node name="ContinueButton" type="Button" parent="MenuContainer" unique_id=884559170]
+[node name="MenuContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer" unique_id=1108384419]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="CenterContainer/MarginContainer/MenuContainer" unique_id=884559170]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_fob5h")
 theme_override_font_sizes/font_size = 48
 text = "Continue"
 
-[node name="SaveButton" type="Button" parent="MenuContainer" unique_id=2021809450]
+[node name="SaveButton" type="Button" parent="CenterContainer/MarginContainer/MenuContainer" unique_id=2021809450]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_fob5h")
 theme_override_font_sizes/font_size = 48
 text = "Save game"
 
-[node name="SettingsButton" type="Button" parent="MenuContainer" unique_id=734879022]
+[node name="SettingsButton" type="Button" parent="CenterContainer/MarginContainer/MenuContainer" unique_id=734879022]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_fob5h")
 theme_override_font_sizes/font_size = 48
 text = "settings"
 
-[node name="MenuButton" type="Button" parent="MenuContainer" unique_id=764225508]
+[node name="MenuButton" type="Button" parent="CenterContainer/MarginContainer/MenuContainer" unique_id=764225508]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_fob5h")
 theme_override_font_sizes/font_size = 48
 text = "Go to menu"
 
-[connection signal="pressed" from="MenuContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
-[connection signal="pressed" from="MenuContainer/SaveButton" to="." method="_on_save_button_pressed"]
-[connection signal="pressed" from="MenuContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
-[connection signal="pressed" from="MenuContainer/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/MenuContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/MenuContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/MenuContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/MenuContainer/MenuButton" to="." method="_on_menu_button_pressed"]

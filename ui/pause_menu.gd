@@ -1,6 +1,6 @@
-extends Control
+extends CanvasLayer
 
-@onready var menu_container = $MenuContainer
+@onready var menu_container = $CenterContainer/MarginContainer/MenuContainer
 
 func _ready() -> void:
 	hide()
