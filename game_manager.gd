@@ -8,6 +8,7 @@ const SAVE_PATH = "user://save_data.json"
 var world = "res://world.tscn" 
 var main_menu_path = "res://ui/main_menu.tscn"
 var game_over_path = "res://ui/game_over.tscn"
+var chest_scene: PackedScene = preload("res://misc/chest.tscn")
 
 func start_new_game():
 	PlayerData.gold = 0
@@ -65,3 +66,8 @@ func load_game() -> bool:
 	change_state(GameState.PLAYING)
 	get_tree().change_scene_to_file(world)
 	return true
+
+func spawn_loot(spawn_position: Vector2):
+	var chest = chest_scene.instantiate()
+	chest.global_position = spawn_position
+	get_tree().current_scene.call_deferred("add_child", chest)

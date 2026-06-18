@@ -1,23 +1,17 @@
 extends CharacterBody2D
 
 var player: Node2D = null
+@export var stats: Resource
 
-@export_group("Stats")
-@export var health: int = 100
-@export var speed: float = 100.0
-@export var turn_speed: float = 2.0 # NEW: How fast it rotates. Lower = more sluggish!
-@export var xp_reward: int = 25
-
-@export_group("Assets")
-@export var destroyed_image: Texture2D
-@export var loot_drop_scene: PackedScene
-
+@onready var cannon = $slot
 @onready var sprite = $Sprite2D
 @onready var collision = $CollisionShape2D
 var is_destroyed = false
+var health: int
 
 func _ready() -> void:
 	# Find the player in the scene tree using the group we created
+	health = stats.max_health
 	player = get_tree().get_first_node_in_group("player")
 
 func _physics_process(delta: float) -> void:
@@ -29,8 +23,8 @@ func _physics_process(delta: float) -> void:
 	var target_dir = global_position.direction_to(player.global_position)
 	var target_angle = target_dir.angle()
 	
-	rotation = lerp_angle(rotation, target_angle, turn_speed * delta)
-	velocity = Vector2.RIGHT.rotated(rotation) * speed
+	rotation = lerp_angle(rotation, target_angle, stats.turn_speed * delta)
+	velocity = Vector2.RIGHT.rotated(rotation) * stats.speed
 	move_and_slide()
 
 func take_damage(amount: int):
@@ -44,21 +38,12 @@ func take_damage(amount: int):
 
 func explode():
 	is_destroyed = true
-	
-	PlayerData.add_xp(xp_reward)
+	cannon.queue_free()
+	PlayerData.add_xp(stats.xp_reward)
 	ScoreManager.add_kill()
-	if destroyed_image:
-		sprite.texture = destroyed_image
-		# --- NEW LOOT DROP LOGIC ---
-	if loot_drop_scene:
-		var chest = loot_drop_scene.instantiate()
-		
-		# Set the chest's location to be exactly where the enemy died
-		chest.global_position = global_position 
-		
-		# Add the chest to the main game world (not as a child of the dying enemy!)
-		get_tree().current_scene.call_deferred("add_child", chest)
-	# ---------------------------
+	if stats.destroyed_image:
+		sprite.texture = stats.destroyed_image
+	GameManager.spawn_loot(global_position)
 	collision.set_deferred("disabled", true)
 	remove_from_group("enemies")
 	

@@ -1,18 +1,14 @@
 extends CharacterBody2D
 
 var player: Node2D = null
-
-@export_group("Boss Stats")
-@export var health: int = 1500
-@export var speed: float = 40.0 # Very slow!
-@export var turn_speed: float = 0.1 # Turns like a brick
+@export var stats: Resource
 @export var optimal_range: float = 400.0 # Distance to start circling
-@export var xp_reward: int = 500
 
 var is_destroyed = false
-@onready var sprite = $Sprite2D
+var health: int
 
 func _ready() -> void:
+	health = stats.max_health
 	player = get_tree().get_first_node_in_group("player")
 
 func _physics_process(delta: float) -> void:
@@ -33,11 +29,11 @@ func _physics_process(delta: float) -> void:
 		target_angle = dir_to_player.angle() + (PI / 2.0) 
 
 	# Smoothly rotate the massive ship
-	rotation = lerp_angle(rotation, target_angle, turn_speed * delta)
+	rotation = lerp_angle(rotation, target_angle, stats.turn_speed * delta)
 	
 	# Always move forward in the direction the nose is currently pointing
 	# (Change Vector2.RIGHT to Vector2.UP if your ship sprite faces up!)
-	velocity = Vector2.RIGHT.rotated(rotation) * speed
+	velocity = Vector2.RIGHT.rotated(rotation) * stats.speed
 	
 	move_and_slide()
 
@@ -49,6 +45,6 @@ func take_damage(amount: int):
 
 func explode():
 	is_destroyed = true
-	PlayerData.add_xp(xp_reward)
-	# Add your massive explosion effects and loot drops here!
+	PlayerData.add_xp(stats.xp_reward)
+	# Add explosion effects and loot drops!
 	queue_free()

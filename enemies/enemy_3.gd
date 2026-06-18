@@ -5,11 +5,7 @@ var player: Node2D = null
 enum State { CHASE, WINDUP, CHARGE, COOLDOWN }
 var current_state: State = State.CHASE
 
-@export_group("Base Stats")
-@export var health: int = 150
-@export var speed: float = 80.0
-@export var turn_speed: float = 1.5 
-@export var xp_reward: int = 40 
+@export var stats: Resource
 
 @export_group("Ramming Mechanics")
 @export var charge_speed: float = 400.0
@@ -23,9 +19,8 @@ var spawn_timer: float = initial_spawn_cooldown
 
 var state_timer: float = 0.0
 var is_destroyed: bool = false
+var health: int
 
-@export var destroyed_image: Texture2D
-@export var loot_drop_scene: PackedScene
 
 @onready var sprite = $Sprite2D
 @onready var collision = $CollisionShape2D
@@ -33,6 +28,7 @@ var is_destroyed: bool = false
 @onready var charge_effect: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready() -> void:
+	health = stats.max_health
 	player = get_tree().get_first_node_in_group("player")
 	charge_effect.hide()
 
@@ -63,11 +59,11 @@ func _physics_process(delta: float) -> void:
 
 func process_chase(delta: float):
 	var target_dir = global_position.direction_to(player.global_position)
-	rotation = lerp_angle(rotation, target_dir.angle(), turn_speed * delta)
+	rotation = lerp_angle(rotation, target_dir.angle(), stats.turn_speed * delta)
 	
 	# NOTE: If your ship's sprite is drawn facing UP, change Vector2.RIGHT to Vector2.UP!
 	var forward_vector = Vector2.RIGHT.rotated(rotation) 
-	velocity = forward_vector * speed
+	velocity = forward_vector * stats.speed
 	
 	# 1. Handle the Spawn Cooldown
 	if spawn_timer > 0:
@@ -104,8 +100,8 @@ func process_charge(delta: float):
 func process_cooldown(delta: float):
 	# Move normally, but prevent charging again until timer is done
 	var target_dir = global_position.direction_to(player.global_position)
-	rotation = lerp_angle(rotation, target_dir.angle(), (turn_speed * 0.5) * delta) # Turns even slower while recovering
-	velocity = Vector2.RIGHT.rotated(rotation) * speed
+	rotation = lerp_angle(rotation, target_dir.angle(), (stats.turn_speed * 0.5) * delta) # Turns even slower while recovering
+	velocity = Vector2.RIGHT.rotated(rotation) * stats.speed
 	
 	state_timer -= delta
 	if state_timer <= 0:
@@ -165,20 +161,11 @@ func take_damage(amount: int):
 func explode():
 	is_destroyed = true
 	
-	PlayerData.add_xp(xp_reward)
+	PlayerData.add_xp(stats.xp_reward)
 	
-	if destroyed_image:
-		sprite.texture = destroyed_image
-		# --- NEW LOOT DROP LOGIC ---
-	if loot_drop_scene:
-		var chest = loot_drop_scene.instantiate()
-		
-		# Set the chest's location to be exactly where the enemy died
-		chest.global_position = global_position 
-		
-		# Add the chest to the main game world (not as a child of the dying enemy!)
-		get_tree().current_scene.call_deferred("add_child", chest)
-	# ---------------------------
+	if stats.destroyed_image:
+		sprite.texture = stats.destroyed_image
+	GameManager.spawn_loot(global_position)
 	collision.set_deferred("disabled", true)
 	remove_from_group("enemies")
 	
