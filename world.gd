@@ -2,7 +2,6 @@ extends Node2D
 
 @export_group("Spawning Parameters")
 @export var enemy_scenes: Array[PackedScene] 
-# The "Donut" radius. Adjust these based on your camera/screen size.
 @export var spawn_radius_min: float = 800.0 # Just off-screen
 @export var spawn_radius_max: float = 1200.0 # Not too far away
 @export var max_spawn_attempts: int = 10
@@ -15,29 +14,51 @@ extends Node2D
 @onready var map_generation: Node2D = $map_generation
 @onready var timer: Timer = $Timer
 
+var game_time: float = 0.0
+var active_spawn_pool: Array[PackedScene] = []
+
 func _ready() -> void:
 	# Ensure the timer is running when the game starts
 	if timer.is_stopped():
 		timer.start()
 	PlayerData.leveled_up.connect(_on_player_level_up)
+	active_spawn_pool.append(enemy_scenes[0])
+
+func _process(delta: float) -> void:
+	# 2. Keep track of exactly how many seconds have passed
+	game_time += delta
+	update_difficulty()
 	
+func update_difficulty() -> void:
+	# --- DYNAMIC SPAWN RATE ---
+	# Formula: Start at 2.5 seconds. Every 10 seconds of gameplay, subtract 0.05 seconds.
+	# The max() function ensures it never drops below 0.3 seconds (so it doesn't crash the game!)
+	var new_wait_time = max(0.3, 2.5 - (game_time / 200.0))
+	
+	# Update the timer only if the value has changed significantly
+	if abs(timer.wait_time - new_wait_time) > 0.05:
+		timer.wait_time = new_wait_time
+
+	# --- ENEMY UNLOCKS ---
+	if game_time < 130.0:
+		if game_time > 60.0 and enemy_scenes[1] not in active_spawn_pool:
+			active_spawn_pool.append(enemy_scenes[1])
+		if game_time > 120.0 and enemy_scenes[2] not in active_spawn_pool:
+			active_spawn_pool.append(enemy_scenes[2])
+
 func _on_player_level_up(new_level: int) -> void:
 	# Use modulo (%) to check if the level is perfectly divisible by 5
 	if new_level % levels_between_bosses == 0:
 		spawn_boss()
 		
 func _on_timer_timeout() -> void:
-	# 1. Safety check: Do we have enemies loaded and a player to target?
-	if enemy_scenes.is_empty() or not player:
+	if active_spawn_pool.is_empty() or not player:
 		return
 
-	# 2. Pick a random enemy type from your array
-	var random_enemy_scene = enemy_scenes.pick_random()
-	
-	# 3. Find a safe water location in a ring around the player
+	# Pick a random enemy from our currently unlocked pool
+	var random_enemy_scene = active_spawn_pool.pick_random()
 	var safe_spawn_pos = get_valid_water_spawn()
 	
-	# 4. Spawn the enemy if a valid spot was found
 	if safe_spawn_pos != Vector2.INF:
 		var enemy_instance = random_enemy_scene.instantiate()
 		enemy_instance.global_position = safe_spawn_pos

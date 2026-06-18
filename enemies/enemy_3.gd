@@ -15,11 +15,15 @@ var current_state: State = State.CHASE
 @export var base_ram_damage: float = 10.0
 @export var speed_damage_multiplier: float = 0.1 # Extra damage per unit of speed
 @export var initial_spawn_cooldown: float = 3.0 # Waits 3 seconds after spawning
+@export var damage_scale_per_level: float = 0.05
+@export var health_scale_per_level: float = 0.15
 var spawn_timer: float = initial_spawn_cooldown
 
 var state_timer: float = 0.0
 var is_destroyed: bool = false
 var health: int
+var current_ram_damage: int
+
 
 
 @onready var sprite = $Sprite2D
@@ -31,6 +35,11 @@ func _ready() -> void:
 	health = stats.max_health
 	player = get_tree().get_first_node_in_group("player")
 	charge_effect.hide()
+	var p_level = PlayerData.level
+	var health_multiplier = 1.0 + (p_level * health_scale_per_level)
+	var damage_multiplier = 1.0 + (p_level * damage_scale_per_level)
+	health = int(stats.max_health * health_multiplier)
+	current_ram_damage = base_ram_damage * damage_multiplier
 
 func _physics_process(delta: float) -> void:
 	if is_destroyed or not player:
@@ -127,7 +136,6 @@ func change_state(new_state: State):
 # --- COMBAT LOGIC ---
 
 func handle_ram_impact():
-	# Loop through everything the ship bumped into this frame
 	for i in get_slide_collision_count():
 		var collision_info = get_slide_collision(i)
 		var hit_body = collision_info.get_collider()
@@ -136,7 +144,7 @@ func handle_ram_impact():
 			if hit_body.has_method("take_damage"):
 				# Calculate damage based on how fast we were going!
 				var impact_speed = velocity.length()
-				var total_damage = base_ram_damage + (impact_speed * speed_damage_multiplier)
+				var total_damage = current_ram_damage + (impact_speed * speed_damage_multiplier)
 				
 				hit_body.take_damage(int(total_damage))
 				

@@ -13,3 +13,4 @@ battle_music = ExtResource("3_nhx87")
 game_over_music = ExtResource("4_l2k84")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1321836666]
+volume_db = -22.057
