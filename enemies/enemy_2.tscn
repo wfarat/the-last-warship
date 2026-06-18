@@ -2,7 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://m8gtf0vhgmn8" path="res://textures/enemies/Boats_color2/Boat_color2_4.png" id="1_ndugf"]
 [ext_resource type="Script" uid="uid://clvwitdaik3ii" path="res://enemies/enemy_1.gd" id="1_yqrne"]
+[ext_resource type="Texture2D" uid="uid://dqnjb08q2kcn3" path="res://textures/enemies/Broken_asset/Broken_asset4.png" id="2_q12tc"]
 [ext_resource type="PackedScene" uid="uid://qnxvh3jhaouv" path="res://weapons/Enemy weapons/enemy_missile.tscn" id="2_sx3gy"]
+[ext_resource type="PackedScene" uid="uid://d0lxq08ypcew3" path="res://misc/chest.tscn" id="3_36qqk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sx3gy"]
 radius = 22.0
@@ -12,6 +14,10 @@ height = 126.0
 scale = Vector2(1.2, 1.2)
 script = ExtResource("1_yqrne")
 health = 200
+speed = 50.0
+turn_speed = 1.0
+destroyed_image = ExtResource("2_q12tc")
+loot_drop_scene = ExtResource("3_36qqk")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=161248867]
 position = Vector2(2, 0)
@@ -29,3 +35,5 @@ position = Vector2(-3, 2)
 [node name="Marker2D" type="Marker2D" parent="Node2D" unique_id=1641437437]
 
 [node name="EnemyMissile" parent="Node2D/Marker2D" unique_id=1846065429 instance=ExtResource("2_sx3gy")]
+fire_rate = 5.0
+damage = 50

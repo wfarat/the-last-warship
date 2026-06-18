@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://ddgu0rl3doq8t"]
+
+[ext_resource type="Texture2D" uid="uid://cw6payu2k3vf3" path="res://textures/enemies/boss_main.png" id="1_qf2do"]
+[ext_resource type="Script" uid="uid://vmpqcnp6p0g5" path="res://enemies/enemy_boss.gd" id="1_yxpds"]
+[ext_resource type="PackedScene" uid="uid://c3l7qhkt61jua" path="res://weapons/Enemy weapons/boss_cannon.tscn" id="3_8fsp4"]
+
+[node name="EnemyBoss" type="CharacterBody2D" unique_id=2066353621 groups=["enemies"]]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_yxpds")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1449173980]
+position = Vector2(0, 1)
+rotation = -1.5707964
+texture = ExtResource("1_qf2do")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=149883782]
+position = Vector2(25.333332, 0.6666667)
+scale = Vector2(0.9989407, 1.0037314)
+polygon = PackedVector2Array(-164, -65, 175, -67, 347, -42, 408, -19, 432, -2, 422, 10, 393.75043, 27.231722, 338.3584, 42.508053, 257, 56, 208, 59, 179, 63, 130, 65, 45, 66, -73, 67, -152, 64, -232, 60, -299, 53, -379, 41, -438, 17, -453, -1, -438, -18, -402, -33, -360, -44, -319, -53, -266, -57, -215, -62)
+
+[node name="slots" type="Node2D" parent="." unique_id=1343872090]
+
+[node name="Marker2D" type="Marker2D" parent="slots" unique_id=1643848224]
+position = Vector2(202.66667, 0.6666667)
+
+[node name="boss_cannon" parent="slots/Marker2D" unique_id=599933623 instance=ExtResource("3_8fsp4")]
+position = Vector2(-0.6666653, -5.9604645e-08)
+rotation = 1.5707964
+
+[node name="Marker2D2" type="Marker2D" parent="slots" unique_id=84110963]
+position = Vector2(119.99999, 0.6666667)
+
+[node name="boss_cannon" parent="slots/Marker2D2" unique_id=1171450606 instance=ExtResource("3_8fsp4")]
+position = Vector2(-0.666659, 5.9604645e-08)
+rotation = 1.5707964
+
+[node name="Marker2D3" type="Marker2D" parent="slots" unique_id=1795928522]
+position = Vector2(-238, -0.66666675)
+
+[node name="boss_cannon" parent="slots/Marker2D3" unique_id=1792851127 instance=ExtResource("3_8fsp4")]
+position = Vector2(1.9999982, -1.5258789e-05)
+rotation = -1.5707964
+
+[node name="Marker2D4" type="Marker2D" parent="slots" unique_id=264510941]
+position = Vector2(-166, 0.6666667)
+
+[node name="boss_cannon" parent="slots/Marker2D4" unique_id=603041049 instance=ExtResource("3_8fsp4")]
+position = Vector2(1.3333321, -0.6666666)
+rotation = -1.5707964
