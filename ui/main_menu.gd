@@ -2,7 +2,6 @@ extends Control
 
 @onready var load_button = $MarginContainer/VBoxContainer/LoadButton
 
-
 func _ready() -> void:
 	# Bezpośrednie i czyste sprawdzenie pliku przez SaveManagera
 	load_button.disabled = not SaveManager.has_save_file()
