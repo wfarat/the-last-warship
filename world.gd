@@ -10,14 +10,21 @@ extends Node2D
 @export var boss_scene: PackedScene
 @export var levels_between_bosses: int = 5
 
+@export_group("Random Event Settings")
+@export var event_chance: float = 0.3 # 30% chance an event occurs per check
+@export var event_check_interval: float = 45.0 # Check for an event every 45s
+
 @onready var player = $Player
 @onready var map_generation: Node2D = $map_generation
 @onready var timer: Timer = $Timer
 
 var game_time: float = 0.0
 var active_spawn_pool: Array[PackedScene] = []
+var check_timer: float = 0.0
 
 func _ready() -> void:
+	EventManager.player = player
+	EventManager.map_generation = map_generation
 	# Ensure the timer is running when the game starts
 	if timer.is_stopped():
 		timer.start()
@@ -27,7 +34,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# 2. Keep track of exactly how many seconds have passed
 	game_time += delta
+	check_timer += delta
 	update_difficulty()
+	if check_timer >= event_check_interval:
+		check_timer = 0.0
+		EventManager.attempt_random_event(event_chance)
 	
 func update_difficulty() -> void:
 	# --- DYNAMIC SPAWN RATE ---

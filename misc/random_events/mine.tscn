@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://c8xr7hfl0v76y"]
+
+[ext_resource type="Script" uid="uid://b1bfh16pwvyeg" path="res://misc/random_events/mine.gd" id="1_6j68k"]
+[ext_resource type="Texture2D" uid="uid://1mdhq8xog12l" path="res://textures/map/mine.png" id="1_xteou"]
+[ext_resource type="Texture2D" uid="uid://cborhhq4806wv" path="res://textures/map/effects/boom1.png" id="3_07r5p"]
+[ext_resource type="Texture2D" uid="uid://27l16hhgsx06" path="res://textures/map/effects/boom2.png" id="4_0y8l1"]
+[ext_resource type="Texture2D" uid="uid://cek8ykv8k0r1b" path="res://textures/map/effects/boom3.png" id="5_ekt0j"]
+[ext_resource type="Texture2D" uid="uid://bvcmy6odqilpa" path="res://textures/map/effects/boom4.png" id="6_ge3gj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7x54b"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0e83q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_07r5p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0y8l1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ekt0j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ge3gj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Mine" type="Area2D" unique_id=1236862220]
+collision_layer = 0
+script = ExtResource("1_6j68k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1860026405]
+shape = SubResource("CircleShape2D_7x54b")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1855590488]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_xteou")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1547280570]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_0e83q")
+frame_progress = 0.20591374

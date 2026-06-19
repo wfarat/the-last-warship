@@ -22,6 +22,7 @@ GameManager="*uid://jd6a1uyxhovx"
 ScoreManager="*uid://di1ghmmwaaddt"
 GlobalSettings="*uid://sqn6jln1e7i3"
 AudioManager="*uid://ylnt6onppwu7"
+EventManager="*uid://doxp6ttfkllt0"
 
 [display]
 
