@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://cbcdjtucdf1k3"]
+
+[ext_resource type="Script" uid="uid://dfl3t6y5h1f4x" path="res://misc/random_events/tornado.gd" id="1_vocf2"]
+
+[sub_resource type="Gradient" id="Gradient_slc6t"]
+colors = PackedColorArray(0.21950445, 0.19696662, 0.2195012, 1, 0.8862616, 0.88626146, 0.8862615, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vocf2"]
+gradient = SubResource("Gradient_slc6t")
+
+[sub_resource type="Curve" id="Curve_qnxat"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.29213488), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vng6x"]
+curve = SubResource("Curve_qnxat")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3317e"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 400.0
+orbit_velocity_min = 0.022000097
+orbit_velocity_max = 0.21500011
+radial_velocity_min = -50.000023
+radial_velocity_max = -50.000023
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 15.0
+scale_curve = SubResource("CurveTexture_vng6x")
+color_ramp = SubResource("GradientTexture1D_vocf2")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dmaff"]
+radius = 396.0808
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qnxat"]
+radius = 120.59851
+
+[node name="Tornado" type="Area2D" unique_id=833642835]
+script = ExtResource("1_vocf2")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=838538571]
+amount = 1000
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_3317e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1023554062]
+shape = SubResource("CircleShape2D_dmaff")
+
+[node name="DamageZone" type="Area2D" parent="." unique_id=2074394928]
+
+[node name="DamageCollisionShape2D" type="CollisionShape2D" parent="DamageZone" unique_id=663859587]
+shape = SubResource("CircleShape2D_qnxat")

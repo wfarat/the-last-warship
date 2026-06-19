@@ -24,8 +24,6 @@ var is_destroyed: bool = false
 var health: int
 var current_ram_damage: int
 
-
-
 @onready var sprite = $Sprite2D
 @onready var collision = $CollisionShape2D
 @onready var vision_ray: RayCast2D = $RayCast2D
@@ -44,7 +42,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if is_destroyed or not player:
 		return
-		
 	# Always aim the raycast at the player
 	vision_ray.target_position = to_local(player.global_position)
 		

@@ -33,7 +33,6 @@ func change_state(new_state: GameState):
 	current_state = new_state
 	state_changed.emit(current_state)
 
-
 func save_game() -> void:
 	# 1. Zbieramy globalne dane gracza
 	var data = {
