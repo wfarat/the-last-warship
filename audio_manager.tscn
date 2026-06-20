@@ -4,12 +4,8 @@
 [ext_resource type="AudioStream" uid="uid://cmtw2g43bc0tu" path="res://sounds/menu_music.mp3" id="2_5olve"]
 [ext_resource type="AudioStream" uid="uid://d1olulrjv81t0" path="res://sounds/The_Figurehead’s_Vigil.mp3" id="3_nhx87"]
 [ext_resource type="AudioStream" uid="uid://c2ekosc5q0kog" path="res://sounds/outro.mp3" id="4_l2k84"]
-
-[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_5olve"]
-mix_rate = 53996.0
-
-[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_nhx87"]
-mix_rate = 14412.0
+[ext_resource type="AudioStream" uid="uid://c3jl8dnf6qssm" path="res://sounds/tornado-warning-short.mp3" id="5_l2k84"]
+[ext_resource type="AudioStream" uid="uid://cdjvvnjmmuxhb" path="res://sounds/sonar-beeps-loop.mp3" id="6_l2k84"]
 
 [node name="AudioManager" type="Node" unique_id=671768260]
 process_mode = 3
@@ -17,10 +13,10 @@ script = ExtResource("1_jisk1")
 menu_music = ExtResource("2_5olve")
 battle_music = ExtResource("3_nhx87")
 game_over_music = ExtResource("4_l2k84")
-tornado_warning_sfx = SubResource("AudioStreamGenerator_5olve")
-mine_warning_sfx = SubResource("AudioStreamGenerator_nhx87")
+tornado_warning_sfx = ExtResource("5_l2k84")
+mine_warning_sfx = ExtResource("6_l2k84")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1321836666]
-volume_db = -22.057
+volume_db = -11.11
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="." unique_id=729330355]

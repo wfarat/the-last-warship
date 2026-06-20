@@ -1,10 +1,10 @@
 extends Area2D
 
 @export_group("Tornado Stats")
-@export var move_speed: float = 30.0 # How fast the tornado chases the player
+@export var move_speed: float = 50.0 # How fast the tornado chases the player
 @export var pull_speed: float = 100.0 # How fast ships are dragged in
-@export var min_duration: float = 10.0
-@export var max_duration: float = 20.0
+@export var min_duration: float = 20.0
+@export var max_duration: float = 50.0
 @export var tornado_damage: int = 15
 @export var damage_tick_rate: float = 0.5
 

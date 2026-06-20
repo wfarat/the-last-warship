@@ -7,7 +7,7 @@ var map_generation: Node2D = null
 
 func attempt_random_event(event_chance: float) -> void:
 	if randf() > event_chance:
-		return # Failed the dice roll, stay peaceful
+		return
 		
 	# Pick a random event index
 	var event_id = randi() % 2
@@ -17,19 +17,14 @@ func attempt_random_event(event_chance: float) -> void:
 		1: trigger_minefield_event()
 
 func announcement(id: int) -> void:
-	# Play your global warning siren/sound
-	# audio_player.play()
 	print("event triggered", id)
 	AudioManager.play_annoucement(id)
-	# Automatically hide the splash announcement card after 3 seconds
-
-# --- EVENT DEPLOYMENT ---
 
 func trigger_tornado_event() -> void:
 	announcement(0)
-	
+	await get_tree().create_timer(10.0, false).timeout
 	# Spawn the tornado slightly off-screen but heading toward the player's general area
-	var spawn_offset = Vector2.RIGHT.rotated(randf() * TAU) * 600.0
+	var spawn_offset = Vector2.RIGHT.rotated(randf() * TAU) * 800.0
 	var tornado = tornado_scene.instantiate()
 	tornado.global_position = player.global_position + spawn_offset
 	
@@ -38,9 +33,9 @@ func trigger_tornado_event() -> void:
 
 func trigger_minefield_event() -> void:
 	announcement(1)
-	
-	var mine_count = randi_range(15, 30)
-	var spawn_radius = 500.0
+	await get_tree().create_timer(3.0, false).timeout
+	var mine_count = randi_range(25, 70)
+	var spawn_radius = 1000.0
 	
 	for i in range(mine_count):
 		# Generate a random point within a circular ring around the player

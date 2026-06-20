@@ -20,11 +20,15 @@ func _on_game_state_changed(new_state: GameManager.GameState) -> void:
 	match new_state:
 		GameManager.GameState.MENU:
 			play_music(menu_music)
+			sfx_player.stream_paused = false
 		GameManager.GameState.PLAYING:
 			play_music(battle_music)
+			sfx_player.stream_paused = false
 		GameManager.GameState.GAME_OVER:
 			play_music(game_over_music)
+			sfx_player.stream_paused = false
 		GameManager.GameState.PAUSED:
+			sfx_player.stream_paused = true
 			pass # Nie zmieniamy utworu, niech leci dalej tło z bitwy!
 
 func play_music(stream: AudioStream) -> void:
