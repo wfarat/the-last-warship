@@ -101,13 +101,21 @@ func die():
 		GameManager.call_deferred("game_over")	
 		queue_free()
 
+var min_zoom: float = 0.5
+var max_zoom: float = 3.0 
+var zoom_speed: float = 0.1
+
 func _input(_event):
 	if Input.is_action_just_pressed("zoom_in"):
-		var zoom_val = camera_2d.zoom.x - 0.1
+		var zoom_val = camera_2d.zoom.x + zoom_speed
+		# Force the value to stay within our safe limits
+		zoom_val = clamp(zoom_val, min_zoom, max_zoom)
 		camera_2d.zoom = Vector2(zoom_val, zoom_val)
   
 	if Input.is_action_just_pressed("zoom_out"):
-		var zoom_val = camera_2d.zoom.x + 0.1
+		var zoom_val = camera_2d.zoom.x - zoom_speed
+		# Force the value to stay within our safe limits
+		zoom_val = clamp(zoom_val, min_zoom, max_zoom)
 		camera_2d.zoom = Vector2(zoom_val, zoom_val)
 		
 		

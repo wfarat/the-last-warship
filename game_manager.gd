@@ -1,6 +1,6 @@
 extends Node
 
-enum GameState { MENU, PLAYING, PAUSED, GAME_OVER }
+enum GameState { MENU, PLAYING, PAUSED, GAME_OVER, SHOP, UPGRADE}
 var current_state: GameState = GameState.MENU
 
 const SAVE_PATH = "user://save_data.json"

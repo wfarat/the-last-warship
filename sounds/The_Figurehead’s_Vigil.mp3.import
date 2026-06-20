@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/The_Figurehead’s_Vigil.mp3-5eb0ffba1f453201
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0
