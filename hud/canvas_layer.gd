@@ -87,4 +87,5 @@ func _update_gold_display(new_gold: int):
 	
 func _on_close_button_pressed() -> void:
 	hide()
+	GameManager.change_state(GameManager.GameState.PLAYING)
 	get_tree().paused = false # Unpause the game world

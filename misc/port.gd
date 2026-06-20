@@ -13,6 +13,7 @@ func _on_dock_sensor_body_entered(body: Node2D) -> void:
 		
 		shop_hud.open_shop(body) 
 		GameManager.save_game()
+		GameManager.change_state(GameManager.GameState.SHOP)
 		get_tree().paused = true
 
 

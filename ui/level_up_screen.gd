@@ -7,7 +7,7 @@ func _ready() -> void:
 	
 	PlayerData.leveled_up.connect(_on_player_leveled_up)
 
-func _on_player_leveled_up(new_level: int) -> void:
+func _on_player_leveled_up(_new_level: int) -> void:
 	var player = get_tree().get_first_node_in_group("player")
 	
 	if player:
@@ -19,7 +19,7 @@ func trigger_level_up(player: Node2D) -> void:
 		
 	for child in options_container.get_children():
 		child.queue_free()
-		
+	GameManager.change_state(GameManager.GameState.UPGRADE)
 	get_tree().paused = true
 	show()
 	
@@ -42,5 +42,6 @@ func trigger_level_up(player: Node2D) -> void:
 
 func _on_upgrade_chosen(skill_to_upgrade: Skill) -> void:
 	skill_to_upgrade.upgrade()
+	GameManager.change_state(GameManager.GameState.PLAYING)
 	get_tree().paused = false
 	hide()
