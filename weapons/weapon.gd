@@ -127,3 +127,6 @@ func next_tier_price():
 
 func play_shoot_effects():
 	pass
+
+func current_tier_price():
+	return tier_price[current_tier]

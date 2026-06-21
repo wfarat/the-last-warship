@@ -69,6 +69,7 @@ func _on_upgrade_pressed():
 	if current_weapon.has_method("upgrade_tier") and current_weapon.has_method("next_tier_price"):
 		if PlayerData.spend_gold(current_weapon.next_tier_price()):
 			current_weapon.upgrade_tier()
+			upgrade_button.text = 'Upgrade ' + str(current_weapon.next_tier_price()) + 'g'
 			status_label.text = "Upgraded to Tier " + str(current_weapon.current_tier+1)
 
 func _on_sell_button_pressed():
@@ -76,9 +77,10 @@ func _on_sell_button_pressed():
 	for child in target_slot.get_children():
 		child.queue_free()
 	var current_weapon = target_slot.get_child(0)
-	if current_weapon.has_method("next_tier_price"):
-		PlayerData.add_gold(current_weapon.next_tier_price())
+	if current_weapon.has_method("current_tier_price"):
+		PlayerData.add_gold(current_weapon.current_tier_price()/2)
 		_on_slot_button_pressed(selected_slot_index)
+	action_panel.hide()
 
 func set_button_visibility(buy_state: bool, upgrade_state: bool):
 	$Panel/Box/HBox/ActionPanel/ButtonContainer/BuyContainer.visible = buy_state
