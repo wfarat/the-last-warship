@@ -39,6 +39,7 @@ func trigger_level_up(player: Node2D) -> void:
 			
 			btn.pressed.connect(_on_upgrade_chosen.bind(skill))
 			options_container.add_child(btn)
+	options_container.get_child(-1).grab_focus()
 
 func _on_upgrade_chosen(skill_to_upgrade: Skill) -> void:
 	skill_to_upgrade.upgrade()

@@ -4,7 +4,7 @@ class_name HealSkill
 @export var heal_amount: int = 5000
 @export var heal_effect_scene: PackedScene
 
-func activate_effect(caster: Node2D) -> void:
+func activate_effect(caster: Node2D, _controller: bool) -> void:
 	if caster.has_method("heal"):
 		
 		caster.heal(heal_amount)

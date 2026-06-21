@@ -15,6 +15,8 @@
 script = ExtResource("1_tlwt5")
 enemy_scenes = Array[PackedScene]([ExtResource("2_wse8f"), ExtResource("3_ic0uy"), ExtResource("4_k3n1d")])
 boss_scene = ExtResource("5_2o6r5")
+event_chance = 1.0
+event_check_interval = 30.0
 
 [node name="map_generation" parent="." unique_id=1720494624 node_paths=PackedStringArray("player") instance=ExtResource("9_ioo17")]
 player = NodePath("../Player")

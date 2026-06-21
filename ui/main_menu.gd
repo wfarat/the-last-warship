@@ -1,10 +1,13 @@
 extends Control
 
 @onready var load_button = $MarginContainer/VBoxContainer/LoadButton
+@onready var main_menu: Control = $"."
+@onready var new_game_button: Button = $MarginContainer/VBoxContainer/NewGameButton
 @onready var scores_panel = $ScoresPanel
 @onready var scores_list = $ScoresPanel/VBoxContainer/ScoresList
 var font = load("res://ui/BebasNeue-Regular.ttf")
 func _ready() -> void:
+	new_game_button.grab_focus()
 	scores_panel.hide()
 	# Bezpośrednie i czyste sprawdzenie pliku przez SaveManagera
 	load_button.disabled = not SaveManager.has_save_file()
@@ -38,6 +41,7 @@ func _on_highscores_button_pressed() -> void:
 	scores_panel.show()
 
 func _on_close_scores_button_pressed() -> void:
+	new_game_button.grab_focus()
 	scores_panel.hide()
 	
 func _on_play_button_pressed() -> void:

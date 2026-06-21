@@ -7,7 +7,6 @@ var master_bus_index: int
 
 func _ready() -> void:
 	hide() # Na start schowane
-	
 	# Szukamy kanału "Master" (Główny kanał w zakładce Audio na dole edytora)
 	master_bus_index = AudioServer.get_bus_index("Master")
 	

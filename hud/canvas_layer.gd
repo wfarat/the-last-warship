@@ -14,14 +14,16 @@ var selected_slot_index: int = -1
 @onready var gold_label = $Panel/Box/Gold
 @onready var upgrade_button = $Panel/Box/HBox/ActionPanel/ButtonContainer/UpgradeButton
 @onready var sell_button = $Panel/Box/HBox/ActionPanel/ButtonContainer/SellButton
+@onready var first_button = $Panel/Box/HBox/SlotPanel/Slots/Top/Left
 func _ready() -> void:
-	hide() 
+	hide()
 	PlayerData.gold_changed.connect(_update_gold_display)
 	_update_gold_display(PlayerData.gold)
 	action_panel.hide()
 	
 func open_shop(player: CharacterBody2D):
 	show()
+	first_button.grab_focus()
 	player_ship = player
 	action_panel.hide()
 
@@ -39,6 +41,7 @@ func _on_slot_button_pressed(slot_index: int):
 		status_label.text = "Occupied by: " + current_weapon.name
 		if (current_weapon.has_method("next_tier_price")):
 			upgrade_button.text = 'Upgrade ' + str(current_weapon.next_tier_price()) + 'g'
+			upgrade_button.grab_focus()
 		set_button_visibility(false, true)
 
 func _on_buy_weapon_pressed(weapon_type: String):
@@ -66,6 +69,7 @@ func _on_upgrade_pressed():
 	if current_weapon.has_method("upgrade_tier") and current_weapon.has_method("next_tier_price"):
 		if PlayerData.spend_gold(current_weapon.next_tier_price()):
 			current_weapon.upgrade_tier()
+			upgrade_button.text = 'Upgrade ' + str(current_weapon.next_tier_price()) + 'g'
 			status_label.text = "Upgraded to Tier " + str(current_weapon.current_tier+1)
 
 func _on_sell_button_pressed():
@@ -73,9 +77,10 @@ func _on_sell_button_pressed():
 	for child in target_slot.get_children():
 		child.queue_free()
 	var current_weapon = target_slot.get_child(0)
-	if current_weapon.has_method("next_tier_price"):
-		PlayerData.add_gold(current_weapon.next_tier_price())
+	if current_weapon.has_method("current_tier_price"):
+		PlayerData.add_gold(current_weapon.current_tier_price()/2)
 		_on_slot_button_pressed(selected_slot_index)
+	action_panel.hide()
 
 func set_button_visibility(buy_state: bool, upgrade_state: bool):
 	$Panel/Box/HBox/ActionPanel/ButtonContainer/BuyContainer.visible = buy_state

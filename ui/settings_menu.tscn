@@ -8,6 +8,7 @@ bg_color = Color(0, 0, 0, 1)
 
 [node name="SettingsMenu" type="CanvasLayer" unique_id=1285788639]
 process_mode = 3
+layer = 5
 script = ExtResource("1_h6jc8")
 
 [node name="Panel" type="Panel" parent="." unique_id=83198017]

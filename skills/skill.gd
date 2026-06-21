@@ -25,18 +25,18 @@ func _process(delta: float) -> void:
 			current_cooldown = 0.0
 
 # The player presses a button to call this function
-func execute(caster: Node2D) -> void:
+func execute(caster: Node2D, controller: bool) -> void:
 	if is_ready:
 		is_ready = false
 		current_cooldown = base_cooldown
 		skill_activated.emit()
 		
 		# Call the custom logic
-		activate_effect(caster)
+		activate_effect(caster, controller)
 
 # --- VIRTUAL FUNCTIONS (To be overridden by child scripts) ---
 
-func activate_effect(_caster: Node2D) -> void:
+func activate_effect(_caster: Node2D, _controller: bool) -> void:
 	pass # Child scripts replace this with explosions, dashes, etc.
 
 func upgrade() -> void:
