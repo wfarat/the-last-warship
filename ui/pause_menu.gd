@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @onready var menu_container = $CenterContainer/MarginContainer/MenuContainer
+@onready var continue_button = $CenterContainer/MarginContainer/MenuContainer/ContinueButton
 
 func _ready() -> void:
 	hide()
@@ -9,6 +10,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		if GameManager.current_state == GameManager.GameState.PLAYING or GameManager.current_state == GameManager.GameState.PAUSED:
+			continue_button.grab_focus()
 			toggle_pause()
 
 func toggle_pause() -> void:

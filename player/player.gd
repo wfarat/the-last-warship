@@ -32,6 +32,8 @@ func _ready() -> void:
 						installed_cannon.upgrade_tier()
 		
 		PlayerData.saved_ship_data = {}
+var using_controller: bool = false
+	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if GameManager.current_state != GameManager.GameState.PLAYING:
@@ -40,12 +42,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		if skill_manager.get_child_count() > 0:
 			var skill = skill_manager.get_child(0)
 			
-			skill.execute(self)
+			skill.execute(self, using_controller)
 	if event.is_action_pressed("skill_2"):
 		if skill_manager.get_child_count() > 0:
 			var skill = skill_manager.get_child(1)
 			
-			skill.execute(self)
+			skill.execute(self, using_controller)
 			
 func _physics_process(delta: float) -> void:
 	# Just steering and driving!
@@ -106,6 +108,16 @@ var max_zoom: float = 3.0
 var zoom_speed: float = 0.1
 
 func _input(_event):
+	# 1. If they touch the keyboard or move/click the mouse
+	if _event is InputEventMouse or _event is InputEventKey:
+		using_controller = false
+		
+	# 2. If they press a button or move a joystick on the controller
+	elif _event is InputEventJoypadButton or _event is InputEventJoypadMotion:
+		# Ignore tiny joystick drifts so it doesn't swap accidentally
+		if _event is InputEventJoypadMotion and abs(_event.axis_value) < 0.1:
+			return 
+		using_controller = true
 	if Input.is_action_just_pressed("zoom_in"):
 		var zoom_val = camera_2d.zoom.x + zoom_speed
 		# Force the value to stay within our safe limits
